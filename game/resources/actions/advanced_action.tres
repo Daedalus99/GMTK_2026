@@ -1,0 +1,16 @@
+[gd_resource type="ActionResource" script_class="ActionResource" format=3 uid="uid://c2n8m5t1k7xpq"]
+
+[resource]
+script = preload("res://game/data/action_resource.gd")
+action_id = "advanced_action"
+display_name = "Advanced Protocol"
+description = "Powerful manual action unlocked at 50% progress"
+base_purchase_cost = 200.0
+cost_scaling_factor = 1.8
+base_manual_reduction = 25.0
+base_auto_reduction_rate = 0.0
+output_scaling_factor = 1.5
+cooldown_duration = 3.0
+max_level = 5
+unlock_threshold = 0.5
+starts_unlocked = false
