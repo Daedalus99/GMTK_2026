@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cb53jqpqewn46"]
+
+[ext_resource type="Script" uid="uid://b04o50ny0hwek" path="res://shop.gd" id="1_q3d0q"]
+[ext_resource type="Resource" uid="uid://btc4stl7clggt" path="res://nanobot.tres" id="2_dsjsx"]
+
+[node name="ShopUi" type="Control" unique_id=2018579107]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_q3d0q")
+wares = [ExtResource("2_dsjsx"), ExtResource("2_dsjsx"), ExtResource("2_dsjsx"), ExtResource("2_dsjsx"), ExtResource("2_dsjsx"), ExtResource("2_dsjsx")]
+
+[node name="Panel" type="Panel" parent="." unique_id=1214084766]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=2028637207]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 44
+alignment = 1
+metadata/_edit_use_anchors_ = true

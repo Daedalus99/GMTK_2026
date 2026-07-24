@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cfic7q5fbp06c" path="res://nanobot.png" id="3_p3prn"]
 [ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://dna.png" id="4_hqjpw"]
 [ext_resource type="Texture2D" uid="uid://8wrc51req7m3" path="res://robo cursor.png" id="7_x782j"]
+[ext_resource type="PackedScene" uid="uid://cb53jqpqewn46" path="res://shop ui.tscn" id="9_sij6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
 shader = ExtResource("1_ksgwh")
@@ -135,3 +136,10 @@ scale = Vector2(6.125, 6.125)
 position = Vector2(973, 572)
 scale = Vector2(5.8125, 5.1875)
 texture = ExtResource("7_x782j")
+
+[node name="ShopUi" parent="." unique_id=2023012564 instance=ExtResource("9_sij6d")]
+layout_mode = 1
+offset_left = 6.1035156e-05
+offset_top = -648.00006
+offset_right = 3.0
+offset_bottom = -554.00006
