@@ -27,7 +27,8 @@ AppConfig="*uid://cjke6crjg14a0"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-mouse_cursor/custom_image="uid://cc0s0tl5bvk1b"
+window/vsync/vsync_mode=3
+mouse_cursor/custom_image="uid://tq0rskjjo2tl"
 
 [editor_plugins]
 
@@ -49,6 +50,7 @@ disable_install_wizard=true
 
 [rendering]
 
+rendering_device/vsync/swapchain_image_count=2
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
