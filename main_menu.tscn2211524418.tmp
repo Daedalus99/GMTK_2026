@@ -1,0 +1,198 @@
+[gd_scene format=3 uid="uid://b8numymoc6dxw"]
+
+[ext_resource type="Script" uid="uid://bhgs1upaahk3y" path="res://addons/maaacks_menus_template/base/nodes/menus/main_menu/main_menu.gd" id="1_qe12f"]
+[ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://addons/maaacks_menus_template/base/nodes/autoloads/ui_sound_controller/ui_sound_controller.gd" id="2_8qtwp"]
+[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_menus_template/base/nodes/music_players/background_music_player.tscn" id="3_dy7ct"]
+[ext_resource type="Script" uid="uid://bkwlopi4qn32o" path="res://addons/maaacks_menus_template/base/nodes/labels/config_name_label.gd" id="4_0o4t1"]
+[ext_resource type="Shader" uid="uid://dd0gc6oc1arya" path="res://cell_grid.gdshader" id="4_dy7ct"]
+[ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_menus_template/base/nodes/utilities/capture_focus.gd" id="5_0k4wn"]
+[ext_resource type="Script" uid="uid://dmkubt2nsnsbn" path="res://addons/maaacks_menus_template/base/nodes/labels/config_version_label.gd" id="6_j5v2v"]
+[ext_resource type="Script" uid="uid://ctf1oj0fn7263" path="res://background.gd" id="7_0o4t1"]
+[ext_resource type="PackedScene" uid="uid://cwt4p3bufkke5" path="res://addons/maaacks_menus_template/base/nodes/windows/confirmation_overlaid_window.tscn" id="7_iotk1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
+shader = ExtResource("4_dy7ct")
+shader_parameter/resolution = Vector2(1000, 2.5)
+shader_parameter/mouse_pos = Vector2(0, 0)
+shader_parameter/res_mult = 0.25
+shader_parameter/speed_multiplier = 0.07
+shader_parameter/enable_background = true
+shader_parameter/background_color = Vector4(0.1, 0, 0.1, 1)
+
+[node name="MainMenu" type="Control" unique_id=781937481]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qe12f")
+game_scene_path = "uid://p70nh78dvtsh"
+confirm_exit = null
+signal_game_start = null
+signal_game_exit = null
+
+[node name="UISoundController" type="Node" parent="." unique_id=1619985599]
+script = ExtResource("2_8qtwp")
+
+[node name="BackgroundMusicPlayer" parent="." unique_id=1141822549 instance=ExtResource("3_dy7ct")]
+
+[node name="BackgroundTextureRect" type="ColorRect" parent="." unique_id=538755836]
+material = SubResource("ShaderMaterial_6shm3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_0o4t1")
+
+[node name="MenuContainer" type="MarginContainer" parent="." unique_id=396616752]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleMargin" type="MarginContainer" parent="MenuContainer" unique_id=2112060331]
+layout_mode = 2
+theme_override_constants/margin_top = 24
+
+[node name="TitleContainer" type="Control" parent="MenuContainer/TitleMargin" unique_id=556427956]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="MenuContainer/TitleMargin/TitleContainer" unique_id=359406872]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "GMTK 2026"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_0o4t1")
+
+[node name="SubTitleMargin" type="MarginContainer" parent="MenuContainer" unique_id=1510335937]
+layout_mode = 2
+theme_override_constants/margin_top = 92
+
+[node name="SubTitleContainer" type="Control" parent="MenuContainer/SubTitleMargin" unique_id=930520368]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SubTitleLabel" type="Label" parent="MenuContainer/SubTitleMargin/SubTitleContainer" unique_id=1037003361]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Subtitle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButtonsMargin" type="MarginContainer" parent="MenuContainer" unique_id=210553886]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 136
+theme_override_constants/margin_bottom = 8
+
+[node name="MenuButtonsContainer" type="Control" parent="MenuContainer/MenuButtonsMargin" unique_id=116448484]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuButtonsBoxContainer" type="BoxContainer" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer" unique_id=2017477786]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -104.0
+offset_right = 64.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+alignment = 1
+vertical = true
+script = ExtResource("5_0k4wn")
+
+[node name="NewGameButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" unique_id=2044537792]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="OptionsButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" unique_id=1486236076]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" unique_id=301223169]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Credits"
+
+[node name="ExitButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" unique_id=1750454379]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit"
+
+[node name="VersionMargin" type="MarginContainer" parent="." unique_id=1732528471]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VersionContainer" type="Control" parent="VersionMargin" unique_id=1603969262]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VersionLabel" type="Label" parent="VersionMargin/VersionContainer" unique_id=793266470]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "v0.0.0"
+horizontal_alignment = 2
+script = ExtResource("6_j5v2v")
+
+[node name="ExitConfirmation" parent="." unique_id=912502155 instance=ExtResource("7_iotk1")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(300, 160)
+layout_mode = 1
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = 80.0
+ignore_siblings = false
+ui_cancel_closes = false
+title = "Exit Game?"
+text = "Really exit the game?"
+
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="confirmed" from="ExitConfirmation" to="." method="_on_exit_confirmation_confirmed"]

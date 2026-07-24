@@ -17,3 +17,6 @@ func _ready() -> void:
 		print("Set shader uniform to: ", global_position)
 	else:
 		print("No ShaderMaterial!")
+
+func add_biomass(biomass: int):
+	biomass_value += biomass
