@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://p70nh78dvtsh"]
 
+[ext_resource type="Script" uid="uid://duth074bs3jyf" path="res://currency_display.gd" id="1_a755x"]
 [ext_resource type="Shader" uid="uid://mq0nxenriluj" path="res://bubbles.gdshader" id="1_ksgwh"]
 [ext_resource type="Script" uid="uid://t1whjqingmjx" path="res://cell.gd" id="1_x782j"]
 [ext_resource type="Shader" uid="uid://cn4baldtebqjq" path="res://wiggly_blob.gdshader" id="1_yborn"]
@@ -51,6 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_a755x")
 metadata/_edit_lock_ = true
 
 [node name="Cell" type="Control" parent="." unique_id=1620166114]

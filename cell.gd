@@ -1,13 +1,12 @@
 extends Control
 
-signal cell_clicked
 var biomass_value = 10
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		cell_clicked.emit()
+		cell_clicked()
 		print("Cell clicked! Gained ", biomass_value, " biomass")
-		queue_free()  # Remove cell after clicking
+		# queue_free()  # Remove cell after clicking
 
 func _ready() -> void:
 	# Delay to ensure position is set properly
@@ -18,5 +17,5 @@ func _ready() -> void:
 	else:
 		print("No ShaderMaterial!")
 
-func add_biomass(biomass: int):
-	biomass_value += biomass
+func cell_clicked():
+	GameManager.add_currency(1)
