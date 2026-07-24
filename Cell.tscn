@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://p70nh78dvtsh"]
+
+[ext_resource type="Shader" uid="uid://mq0nxenriluj" path="res://bubbles.gdshader" id="1_ksgwh"]
+[ext_resource type="Script" uid="uid://t1whjqingmjx" path="res://cell.gd" id="1_x782j"]
+[ext_resource type="Shader" uid="uid://cn4baldtebqjq" path="res://wiggly_blob.gdshader" id="1_yborn"]
+[ext_resource type="Texture2D" uid="uid://dc4v0xm2h68wt" path="res://bubbles.png" id="2_a8024"]
+[ext_resource type="Texture2D" uid="uid://cfic7q5fbp06c" path="res://nanobot.png" id="3_p3prn"]
+[ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://dna.png" id="4_hqjpw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
+shader = ExtResource("1_ksgwh")
+shader_parameter/bottom_color = Color(0.32630295, 0, 0.120675005, 1)
+shader_parameter/top_color = Color(0.5658167, 0.6612455, 1, 1)
+shader_parameter/tex = ExtResource("2_a8024")
+shader_parameter/layer_count = 17
+shader_parameter/time_scale = 0.2
+shader_parameter/base_intensity = 0.1110000052725
+shader_parameter/size = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cell"]
+shader = ExtResource("1_yborn")
+shader_parameter/wiggle_speed = 1.0
+shader_parameter/wiggle_amount = 0.04
+shader_parameter/pulse_amount = 0.1
+shader_parameter/blob_color = Vector4(0.2, 0.8, 0.4, 1)
+shader_parameter/core_color = Vector4(0.6, 1, 0.8, 0.8)
+shader_parameter/size = 0.35
+shader_parameter/wall_thickness = 0.04
+shader_parameter/wiggle_seed = 0.0
+shader_parameter/auto_seed = false
+shader_parameter/node_world_location = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8024"]
+shader = ExtResource("1_yborn")
+shader_parameter/wiggle_speed = 1.0
+shader_parameter/wiggle_amount = 0.02
+shader_parameter/pulse_amount = 0.5
+shader_parameter/blob_color = Vector4(0.1, 0.1, 0.2, 1)
+shader_parameter/core_color = Vector4(0.15, 0.15, 0.25, 1)
+shader_parameter/size = 0.4
+shader_parameter/wall_thickness = 0.05
+shader_parameter/wiggle_seed = 0.0
+shader_parameter/auto_seed = false
+shader_parameter/node_world_location = Vector2(0, 0)
+
+[node name="Cell Scene" type="Control" unique_id=150310224]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Cell" type="Control" parent="." unique_id=1620166114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="ColorRect" parent="Cell" unique_id=1848765191]
+material = SubResource("ShaderMaterial_6shm3")
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 655.0
+metadata/_edit_lock_ = true
+
+[node name="Dna" type="Sprite2D" parent="Cell/Background" unique_id=277500367]
+texture_filter = 1
+position = Vector2(65.5, 97)
+scale = Vector2(1.015625, 1.0622133)
+texture = ExtResource("4_hqjpw")
+
+[node name="Label" type="Label" parent="Cell/Background" unique_id=59567132]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 80.0
+offset_right = 212.0
+offset_bottom = 141.0
+text = "x0"
+
+[node name="CellBody" type="ColorRect" parent="Cell" unique_id=23919256]
+material = SubResource("ShaderMaterial_cell")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21006945
+anchor_top = -0.015432099
+anchor_right = 0.7899306
+anchor_bottom = 1.0154321
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x782j")
+metadata/_edit_use_anchors_ = true
+
+[node name="CellNucleus" type="ColorRect" parent="Cell/CellBody" unique_id=3479582]
+material = SubResource("ShaderMaterial_a8024")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.50136614
+anchor_top = 0.5191257
+anchor_right = 0.51096475
+anchor_bottom = 0.52872425
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.586, 5.901)
+color = Color(0.1, 0.6, 0.2, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Nanobot" type="Sprite2D" parent="." unique_id=974730426]
+texture_filter = 1
+position = Vector2(1065, 410.00003)
+scale = Vector2(1.3125, 1.3125)
+texture = ExtResource("3_p3prn")
