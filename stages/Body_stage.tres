@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Stage" format=3 uid="uid://dg83xkxk455t7"]
+
+[ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="1_k3rfs"]
+[ext_resource type="Texture2D" uid="uid://b5oiqtslcc740" path="res://cell.png" id="2_82xt7"]
+[ext_resource type="Script" uid="uid://bx2co26w5fu3g" path="res://stages/stage.gd" id="2_xlcmj"]
+
+[resource]
+script = ExtResource("2_xlcmj")
+name = "Body Stage"
+metric_name = "Cells Remaining"
+transition_message = "Convert the human's cells into nanobots!"
+starting_amount = 10000000.0
+currency_png = ExtResource("2_82xt7")
+metadata/_custom_type_script = "uid://bx2co26w5fu3g"

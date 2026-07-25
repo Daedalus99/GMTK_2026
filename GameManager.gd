@@ -5,8 +5,7 @@ var player_currency: float = 0
 var level = 1
 var salary: float = 0 # currency per second.
 var payment_frequency: = 0.5
-var upgrades = {}
-@onready var base_objective_hp: float = 1000000
+@onready var base_objective_hp: float = 1_000_000
 
 var curr_objective_hp: float
 
@@ -26,7 +25,6 @@ func reset_game():
 	player_currency = 0
 	salary = 0
 	level = 1
-	upgrades = {}
 	currency_changed.emit(player_currency)
 	salary_changed.emit(salary)
 

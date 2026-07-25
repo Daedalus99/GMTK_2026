@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Stage" format=3 uid="uid://cxnukdrrxva8o"]
+
+[ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="1_o4t21"]
+[ext_resource type="Script" uid="uid://bx2co26w5fu3g" path="res://stages/stage.gd" id="2_ia4cw"]
+[ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://dna.png" id="2_tx3dy"]
+[ext_resource type="PackedScene" uid="uid://p70nh78dvtsh" path="res://Cell.tscn" id="4_mdke5"]
+
+[resource]
+script = ExtResource("2_ia4cw")
+name = "Cell Stage"
+metric_name = "Cell-wall integrity:"
+transition_message = "Attack the cell and breach its walls!"
+starting_amount = 2000000.0
+currency_png = ExtResource("2_tx3dy")
+stage_scene = ExtResource("4_mdke5")
+metadata/_custom_type_script = "uid://bx2co26w5fu3g"

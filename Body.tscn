@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://jj8xitmovmt4"]
+
+[ext_resource type="Shader" uid="uid://mq0nxenriluj" path="res://bubbles.gdshader" id="1_57rr8"]
+[ext_resource type="Texture2D" uid="uid://dc4v0xm2h68wt" path="res://bubbles.png" id="2_4q027"]
+[ext_resource type="PackedScene" uid="uid://cb53jqpqewn46" path="res://shop ui.tscn" id="3_qmdwo"]
+[ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://dna.png" id="4_84doa"]
+[ext_resource type="Script" uid="uid://duth074bs3jyf" path="res://currency_display.gd" id="5_6fdik"]
+[ext_resource type="Script" uid="uid://dvn3jb68x0lsn" path="res://objective_tracker.gd" id="6_j8h7j"]
+[ext_resource type="Texture2D" uid="uid://8rhcgt1tj36n" path="res://human.png" id="7_4q027"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bhil"]
+shader = ExtResource("1_57rr8")
+shader_parameter/bottom_color = Color(0.5647059, 0.6627451, 1, 1)
+shader_parameter/top_color = Color(0.13333328, 0, 0.32, 1)
+shader_parameter/tex = ExtResource("2_4q027")
+shader_parameter/layer_count = 17
+shader_parameter/time_scale = 0.050000002375
+shader_parameter/base_intensity = 0.1110000052725
+shader_parameter/size = 1.0
+
+[node name="Body Scene" type="Control" unique_id=1352005898]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=1059128944]
+material = SubResource("ShaderMaterial_8bhil")
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 655.0
+metadata/_edit_lock_ = true
+
+[node name="ShopUi" parent="." unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container") instance=ExtResource("3_qmdwo")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -571.0
+offset_top = -127.0
+offset_right = 571.0
+offset_bottom = 1.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+ware_spawn_container = NodePath("")
+
+[node name="Dna" type="Sprite2D" parent="ShopUi" unique_id=1499148169]
+texture_filter = 1
+position = Vector2(51.999992, 68.00006)
+scale = Vector2(1.015625, 1.0622133)
+texture = ExtResource("4_84doa")
+script = ExtResource("5_6fdik")
+
+[node name="biomass_count" type="Label" parent="ShopUi/Dna" unique_id=1325517005]
+offset_left = 10.830778
+offset_top = -43.305862
+offset_right = 109.83078
+offset_bottom = 17.694138
+theme_override_font_sizes/font_size = 34
+text = "x0"
+
+[node name="progress_display" type="VBoxContainer" parent="." unique_id=2068579986]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_j8h7j")
+
+[node name="objective_hp" type="HBoxContainer" parent="progress_display" unique_id=516836280]
+layout_mode = 2
+
+[node name="display_label" type="Label" parent="progress_display/objective_hp" unique_id=1186348074]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 45
+text = "Cell-wall integrity:"
+
+[node name="amount" type="Label" parent="progress_display/objective_hp" unique_id=2069545082]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0.56, 0.112000026, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 45
+text = "100.0%"
+
+[node name="dps" type="Label" parent="progress_display" unique_id=30211891]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "00.xxx% per second"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1810955507]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -277.0
+offset_right = 128.0
+offset_bottom = 233.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_4q027")
