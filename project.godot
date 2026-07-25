@@ -22,6 +22,7 @@ ProjectMusicController="*res://addons/maaacks_menus_template/base/nodes/autoload
 ProjectUISoundController="*res://addons/maaacks_menus_template/base/nodes/autoloads/ui_sound_controller/project_ui_sound_controller.tscn"
 GameManager="*uid://bx3o8yvhih8ao"
 AppConfig="*uid://cjke6crjg14a0"
+Utils="*uid://hhy7qw450bgu"
 
 [display]
 

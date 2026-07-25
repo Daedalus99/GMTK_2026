@@ -27,6 +27,17 @@ extends Container
 	set(value):
 		radius = value
 		queue_sort()
+		
+var radius_mult: float
+
+## Radius of the circle in pixels.
+@export var percent_radius_multiplier: float = 100.0:
+	set(value):
+		percent_radius_multiplier = value
+		radius_mult = (value / 100.0)
+		queue_sort()
+		
+
 
 ## When true, children are rotated so their local up-axis points away from centre.
 @export var rotate_children: bool = false:
@@ -52,7 +63,7 @@ func _arrange_children() -> void:
 		return
 
 	# Set minimum size so the parent layout knows how much space we need.
-	var diameter := radius * 2.0
+	var diameter := radius * 2.0 * radius_mult
 	custom_minimum_size = Vector2(diameter, diameter)
 
 	# Keep pivot at the centre so scaling/rotating this node feels natural,
@@ -71,7 +82,7 @@ func _arrange_children() -> void:
 
 		# Position: circle point offset so the child is centred on that point.
 		var child_size := child.size
-		var point := centre + Vector2(cos(angle), sin(angle)) * radius
+		var point := centre + Vector2(cos(angle), sin(angle)) * radius*radius_mult
 		fit_child_in_rect(child, Rect2(point - child_size / 2.0, child_size))
 
 		# Optional rotation: align local +Y outward from centre.
