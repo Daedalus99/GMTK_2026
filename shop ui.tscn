@@ -2,10 +2,17 @@
 
 [ext_resource type="Script" uid="uid://b04o50ny0hwek" path="res://shop.gd" id="1_q3d0q"]
 [ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="2_6ctdn"]
-[ext_resource type="Resource" uid="uid://btc4stl7clggt" path="res://bots/nanobot.tres" id="2_dsjsx"]
+[ext_resource type="Texture2D" uid="uid://dmlumupsbgr3g" path="res://bots/nanobot.png" id="2_hvqmx"]
 [ext_resource type="Resource" uid="uid://b61apsbk65fkn" path="res://bots/drillerbot.tres" id="4_hvqmx"]
 [ext_resource type="Resource" uid="uid://drj53mb21td38" path="res://bots/firebot.tres" id="5_mxce3"]
 [ext_resource type="Resource" uid="uid://oripvixj01dx" path="res://bots/venombot.tres" id="6_44hcy"]
+
+[sub_resource type="Resource" id="Resource_mxce3"]
+script = ExtResource("2_6ctdn")
+name = "Nanobot"
+cost = 5
+png = ExtResource("2_hvqmx")
+metadata/_custom_type_script = "uid://c8orbrt5nx742"
 
 [node name="ShopUi" type="Control" unique_id=2018579107]
 custom_minimum_size = Vector2(0, 64)
@@ -17,7 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_q3d0q")
-wares = Array[ExtResource("2_6ctdn")]([ExtResource("2_dsjsx"), ExtResource("4_hvqmx"), ExtResource("5_mxce3"), ExtResource("6_44hcy")])
+wares = [SubResource("Resource_mxce3"), ExtResource("4_hvqmx"), ExtResource("5_mxce3"), ExtResource("6_44hcy")]
 
 [node name="Panel" type="Panel" parent="." unique_id=1214084766]
 layout_mode = 1

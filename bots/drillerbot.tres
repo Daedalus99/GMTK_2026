@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_e5yny")
 name = "Drillerbot"
-cost = 30
+cost = 100
 png = ExtResource("1_18nsw")
-dps = 6.0
+dps = 5.0
 metadata/_custom_type_script = "uid://c8orbrt5nx742"

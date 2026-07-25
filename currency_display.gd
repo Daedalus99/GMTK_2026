@@ -1,7 +1,7 @@
 # currency_ui.gd
 extends Node
 
-@onready var currency_label: Label = $Cell/Background/Dna/biomass_count
+@onready var currency_label: Label = $Background/Dna/biomass_count
 
 func _ready() -> void:
 	# 1. Listen to the global signal whenever it fires

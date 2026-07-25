@@ -1,11 +1,8 @@
 extends Control
 
-var biomass_value = 10
-
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		cell_clicked()
-		print("Cell clicked! Gained ", biomass_value, " biomass")
 		# queue_free()  # Remove cell after clicking
 
 func _ready() -> void:

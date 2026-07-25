@@ -3,6 +3,7 @@ extends Control
 @export var wares: Array[Ware]
 @onready var ware_buttons_container: HBoxContainer = $Panel/HBoxContainer
 @onready var shop_button = preload("uid://bylhcilxnv7bj")
+@export var ware_spawn_container: Container
 
 var bought_count = 0
 var ware_purchase_counts = {}  # Track purchases per ware type
@@ -43,10 +44,13 @@ func _purchase(ware: Ware, button: Button):
 		# Spawn visual representation
 		if ware.scene or true:
 			# var ware_instance = ware.scene.instantiate() as Node2D
-			var ware_instance = Sprite2D.new()
+			var ware_instance = TextureRect.new()
 			ware_instance.texture = ware.png
-			ware_instance.position = bought_count * Vector2(10, 10)
-			add_sibling(ware_instance)
-			print("spawned sprite at %s, cost was %d" % [ware_instance.position, current_cost])
+			if ware_spawn_container:
+				ware_spawn_container.add_child(ware_instance)
+			else:
+				ware_instance.position = bought_count * Vector2(10, 10)
+				add_sibling(ware_instance)
+				print("spawned sprite at %s, cost was %d" % [ware_instance.position, current_cost])
 		else:
 			print("NO SCENE ASSOCIATED WITH THIS ITEM")

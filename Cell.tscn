@@ -6,6 +6,8 @@
 [ext_resource type="Shader" uid="uid://cn4baldtebqjq" path="res://wiggly_blob.gdshader" id="1_yborn"]
 [ext_resource type="Texture2D" uid="uid://dc4v0xm2h68wt" path="res://bubbles.png" id="2_a8024"]
 [ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://dna.png" id="4_hqjpw"]
+[ext_resource type="Script" uid="uid://bqibbmigy1my3" path="res://circle_container.gd" id="7_a755x"]
+[ext_resource type="Texture2D" uid="uid://dmlumupsbgr3g" path="res://bots/nanobot.png" id="8_sij6d"]
 [ext_resource type="PackedScene" uid="uid://cb53jqpqewn46" path="res://shop ui.tscn" id="9_sij6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
@@ -44,6 +46,44 @@ shader_parameter/wiggle_seed = 0.0
 shader_parameter/auto_seed = false
 shader_parameter/node_world_location = Vector2(0, 0)
 
+[sub_resource type="Animation" id="Animation_sij6d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [275.0]
+}
+
+[sub_resource type="Animation" id="Animation_vkkua"]
+resource_name = "attack_cell"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.25, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [275.0, 300.0, 270.0, 275.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7g3jn"]
+_data = {
+&"RESET": SubResource("Animation_sij6d"),
+&"attack_cell": SubResource("Animation_vkkua")
+}
+
 [node name="Cell Scene" type="Control" unique_id=150310224]
 layout_mode = 3
 anchors_preset = 15
@@ -54,6 +94,27 @@ grow_vertical = 2
 script = ExtResource("1_a755x")
 metadata/_edit_lock_ = true
 
+[node name="Background" type="ColorRect" parent="." unique_id=1848765191]
+material = SubResource("ShaderMaterial_6shm3")
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 655.0
+metadata/_edit_lock_ = true
+
+[node name="Dna" type="Sprite2D" parent="Background" unique_id=277500367]
+texture_filter = 1
+position = Vector2(65.5, 97)
+scale = Vector2(1.015625, 1.0622133)
+texture = ExtResource("4_hqjpw")
+
+[node name="biomass_count" type="Label" parent="Background/Dna" unique_id=59567132]
+offset_left = 8.369232
+offset_top = -40.481514
+offset_right = 107.36923
+offset_bottom = 20.518486
+theme_override_font_sizes/font_size = 34
+text = "x0"
+
 [node name="Cell" type="Control" parent="." unique_id=1620166114]
 layout_mode = 1
 anchors_preset = 15
@@ -62,27 +123,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
-
-[node name="Background" type="ColorRect" parent="Cell" unique_id=1848765191]
-material = SubResource("ShaderMaterial_6shm3")
-layout_mode = 0
-offset_right = 1154.0
-offset_bottom = 655.0
-metadata/_edit_lock_ = true
-
-[node name="Dna" type="Sprite2D" parent="Cell/Background" unique_id=277500367]
-texture_filter = 1
-position = Vector2(65.5, 97)
-scale = Vector2(1.015625, 1.0622133)
-texture = ExtResource("4_hqjpw")
-
-[node name="biomass_count" type="Label" parent="Cell/Background/Dna" unique_id=59567132]
-offset_left = 8.369232
-offset_top = -40.481514
-offset_right = 107.36923
-offset_bottom = 20.518486
-theme_override_font_sizes/font_size = 34
-text = "x0"
 
 [node name="CellBody" type="ColorRect" parent="Cell" unique_id=23919256]
 material = SubResource("ShaderMaterial_cell")
@@ -119,7 +159,30 @@ scale = Vector2(5.586, 5.901)
 color = Color(0.1, 0.6, 0.2, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="ShopUi" parent="." unique_id=2023012564 instance=ExtResource("9_sij6d")]
+[node name="CircleContainer" type="Container" parent="Cell" unique_id=1351969906]
+custom_minimum_size = Vector2(550, 550)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+mouse_filter = 2
+script = ExtResource("7_a755x")
+radius = 275.0
+rotate_children = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cell/CircleContainer" unique_id=2100824884]
+libraries/ = SubResource("AnimationLibrary_7g3jn")
+autoplay = &"attack_cell"
+speed_scale = 4.0
+
+[node name="TextureRect" type="TextureRect" parent="Cell/CircleContainer" unique_id=3564904]
+layout_mode = 2
+texture = ExtResource("8_sij6d")
+
+[node name="ShopUi" parent="." unique_id=2023012564 node_paths=PackedStringArray("ware_spawn_container") instance=ExtResource("9_sij6d")]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 1
 anchors_preset = 7
@@ -130,3 +193,4 @@ offset_top = -127.0
 offset_right = 571.0
 offset_bottom = 1.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
+ware_spawn_container = NodePath("../Cell/CircleContainer")

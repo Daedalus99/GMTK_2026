@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_2rixv")
 name = "Venombot"
-cost = 300
+cost = 10000
 png = ExtResource("1_x46x3")
-dps = 95.0
+dps = 500.0
 metadata/_custom_type_script = "uid://c8orbrt5nx742"

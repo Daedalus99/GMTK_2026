@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_p17qt")
 name = "Firebot"
-cost = 100
+cost = 1000
 png = ExtResource("1_1ga1e")
-dps = 40.0
+dps = 50.0
 metadata/_custom_type_script = "uid://c8orbrt5nx742"
