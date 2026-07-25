@@ -15,4 +15,4 @@ func _on_currency_updated(amount: int) -> void:
 	_update_display(GameManager.player_currency)
 
 func _update_display(total_currency: int) -> void:
-	currency_label.text = "x" + str(total_currency)
+	currency_label.text = "x" + str(floor(total_currency))

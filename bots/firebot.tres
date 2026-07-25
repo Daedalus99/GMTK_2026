@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ware" format=3 uid="uid://drj53mb21td38"]
+
+[ext_resource type="Texture2D" uid="uid://com7vgy0ee8lv" path="res://bots/firebot.png" id="1_1ga1e"]
+[ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="2_p17qt"]
+
+[resource]
+script = ExtResource("2_p17qt")
+name = "Firebot"
+cost = 100
+png = ExtResource("1_1ga1e")
+dps = 40.0
+metadata/_custom_type_script = "uid://c8orbrt5nx742"
