@@ -8,6 +8,7 @@ extends Control
 var bought_count = 0
 var ware_purchase_counts: Dictionary = {}
 @export var inflation_rate: float = 1.15
+@onready var bg = $"../Background"
 
 func _ready() -> void:
 	GameManager.stage_changed.connect(_on_stage_changed)
@@ -16,6 +17,10 @@ func _ready() -> void:
 		load_stage(GameManager.current_stage)
 	else:
 		_populate_wares(wares)
+	var c = Color.from_hsv(randf(), 1.0, 1.0)
+	var dark_c = Color.from_hsv(fposmod(c.h + 0.5, 1.0), c.s, 0.4)
+	bg.material.set_shader_parameter("bottom_color", c)
+	bg.material.set_shader_parameter("top_color", dark_c)
 
 func _on_stage_changed(stage: Stage) -> void:
 	load_stage(stage)
