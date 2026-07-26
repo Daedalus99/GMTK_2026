@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crgg4hvtfuyxa"
-path="res://.godot/imported/drillerbot.png-56b4802e5e86b407e2faca3dc801ab89.ctex"
+path="res://.godot/imported/drillerbot.png-f8dfebce47386d8e3203496e8ab7cd13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bots/drillerbot.png"
-dest_files=["res://.godot/imported/drillerbot.png-56b4802e5e86b407e2faca3dc801ab89.ctex"]
+source_file="res://bots/Cell stage/drillerbot.png"
+dest_files=["res://.godot/imported/drillerbot.png-f8dfebce47386d8e3203496e8ab7cd13.ctex"]
 
 [params]
 

@@ -1,19 +1,41 @@
 extends Control
 
-@export var wares: Array[Ware]
+@export var wares: Array[Ware]  # Fallback wares if no stage is loaded.
 @onready var ware_buttons_container: HBoxContainer = $Panel/HBoxContainer
 @onready var shop_button = preload("uid://bylhcilxnv7bj")
-@export var ware_spawn_container: SilhouetteFill
+@export var ware_spawn_container: Control
 
 var bought_count = 0
-var ware_purchase_counts = {}  # Track purchases per ware type
-@export var inflation_rate = 1.15  # 15% cost increase per purchase
-# Called when the node enters the scene tree for the first time.
+var ware_purchase_counts: Dictionary = {}
+@export var inflation_rate: float = 1.15
+
 func _ready() -> void:
+	GameManager.stage_changed.connect(_on_stage_changed)
+	# Use the active stage's wares if already loaded, else fall back to export.
+	if GameManager.current_stage:
+		load_stage(GameManager.current_stage)
+	else:
+		_populate_wares(wares)
+
+func _on_stage_changed(stage: Stage) -> void:
+	load_stage(stage)
+
+## Clears the shop and repopulates it from the given Stage resource.
+func load_stage(stage: Stage) -> void:
+	_populate_wares(stage.available_wares)
+
+func _populate_wares(new_wares: Array[Ware]) -> void:
+	# Clear existing buttons.
+	for child in ware_buttons_container.get_children():
+		child.queue_free()
+
+	wares = new_wares
+	bought_count = 0
+
 	for ware in wares:
-		# Initialize purchase count
-		ware_purchase_counts[ware.name] = 0
-		
+		if not ware_purchase_counts.has(ware.name):
+			ware_purchase_counts[ware.name] = 0
+
 		var new_button = shop_button.instantiate().get_child(0)
 		update_button_text(new_button, ware)
 		new_button.icon = ware.png

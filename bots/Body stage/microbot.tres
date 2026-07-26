@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ware" format=3 uid="uid://ox50mkj88ysg"]
+
+[ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="1_fb507"]
+[ext_resource type="Texture2D" uid="uid://dx7jd0cfekmjr" path="res://bots/Body stage/microbot.png" id="1_vinbb"]
+
+[resource]
+script = ExtResource("1_fb507")
+name = "Microbot"
+cost = 15
+png = ExtResource("1_vinbb")
+dps = 2.5
+metadata/_custom_type_script = "uid://c8orbrt5nx742"

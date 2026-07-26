@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://jj8xitmovmt4"]
 
 [ext_resource type="PackedScene" uid="uid://b74cv1sv0fm8s" path="res://stage_ui.tscn" id="1_g2rrn"]
-[ext_resource type="Script" uid="uid://di61qy5ca84bl" path="res://clickable_target.gd" id="2_qmdwo"]
+[ext_resource type="Script" uid="uid://dlleylljalgng" path="res://body.gd" id="2_qmdwo"]
 [ext_resource type="Shader" uid="uid://b80qhlvlo8be2" path="res://silhouette_fill.gdshader" id="2_vpsov"]
-[ext_resource type="Texture2D" uid="uid://dmlumupsbgr3g" path="res://bots/nanobot.png" id="5_qmdwo"]
-[ext_resource type="Texture2D" uid="uid://crgg4hvtfuyxa" path="res://bots/drillerbot.png" id="6_84doa"]
+[ext_resource type="Texture2D" uid="uid://dmlumupsbgr3g" path="res://bots/Cell stage/nanobot.png" id="5_qmdwo"]
+[ext_resource type="Texture2D" uid="uid://crgg4hvtfuyxa" path="res://bots/Cell stage/drillerbot.png" id="6_84doa"]
 [ext_resource type="Texture2D" uid="uid://8rhcgt1tj36n" path="res://human.png" id="7_4q027"]
-[ext_resource type="Texture2D" uid="uid://cfyd4gd0sg6wc" path="res://bots/venombot.png" id="7_6fdik"]
-[ext_resource type="Texture2D" uid="uid://com7vgy0ee8lv" path="res://bots/firebot.png" id="8_j8h7j"]
+[ext_resource type="Texture2D" uid="uid://cfyd4gd0sg6wc" path="res://bots/Cell stage/venombot.png" id="7_6fdik"]
+[ext_resource type="Texture2D" uid="uid://com7vgy0ee8lv" path="res://bots/Cell stage/firebot.png" id="8_j8h7j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57rr8"]
 shader = ExtResource("2_vpsov")
@@ -25,6 +25,9 @@ grow_vertical = 2
 
 [node name="Stage UI" parent="." unique_id=187739743 instance=ExtResource("1_g2rrn")]
 layout_mode = 1
+
+[node name="ShopUi" parent="Stage UI" index="1" unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container")]
+ware_spawn_container = NodePath("../../Body/SilhouetteDisplay")
 
 [node name="Body" type="Control" parent="." unique_id=1803973143]
 layout_mode = 1

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Ware" format=3 uid="uid://b61apsbk65fkn"]
 
-[ext_resource type="Texture2D" uid="uid://crgg4hvtfuyxa" path="res://bots/drillerbot.png" id="1_18nsw"]
+[ext_resource type="Texture2D" uid="uid://crgg4hvtfuyxa" path="res://bots/Cell stage/drillerbot.png" id="1_18nsw"]
 [ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="2_e5yny"]
 
 [resource]

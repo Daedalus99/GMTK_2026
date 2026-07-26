@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ware" format=3 uid="uid://0yoreiwqpepl"]
+
+[ext_resource type="Texture2D" uid="uid://b8cuhniq155me" path="res://bots/Body stage/picklebot.png" id="1_xnlso"]
+[ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="2_e340d"]
+
+[resource]
+script = ExtResource("2_e340d")
+name = "Picklebot?"
+cost = 250
+png = ExtResource("1_xnlso")
+dps = 15.0
+metadata/_custom_type_script = "uid://c8orbrt5nx742"

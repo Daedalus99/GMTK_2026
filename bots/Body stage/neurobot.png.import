@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfyd4gd0sg6wc"
-path="res://.godot/imported/venombot.png-7c226c2d9660d33ff3d318a85340737b.ctex"
+uid="uid://bm771rnl68nmj"
+path="res://.godot/imported/neurobot.png-fc2ee18b9ac027167e14f52cbaf86800.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bots/venombot.png"
-dest_files=["res://.godot/imported/venombot.png-7c226c2d9660d33ff3d318a85340737b.ctex"]
+source_file="res://bots/Body stage/neurobot.png"
+dest_files=["res://.godot/imported/neurobot.png-fc2ee18b9ac027167e14f52cbaf86800.ctex"]
 
 [params]
 

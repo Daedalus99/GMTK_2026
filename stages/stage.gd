@@ -8,3 +8,4 @@ extends Resource
 @export var available_wares: Array[Ware]
 @export var currency_png: Texture2D
 @export var stage_scene: PackedScene
+@export var reset_salary_on_start: bool = true

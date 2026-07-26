@@ -76,10 +76,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="Stage UI" parent="." unique_id=187739743 instance=ExtResource("1_hqjpw")]
 layout_mode = 1
+mouse_filter = 2
+
+[node name="Background" parent="Stage UI" index="0" unique_id=1662449333]
+mouse_filter = 2
+
+[node name="ShopUi" parent="Stage UI" index="1" unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container")]
+mouse_filter = 2
+ware_spawn_container = NodePath("../../Cell/CellBody/CircleContainer")
+
+[node name="CurrencyDisplay" parent="Stage UI/ShopUi" index="1" unique_id=1220917504]
+mouse_filter = 2
+
+[node name="Dna" parent="Stage UI/ShopUi/CurrencyDisplay" index="0" unique_id=307377816]
+mouse_filter = 2
+
+[node name="progress_display" parent="Stage UI" index="2" unique_id=883238543]
+mouse_filter = 2
+
+[node name="objective_hp" parent="Stage UI/progress_display" index="0" unique_id=1143825827]
+mouse_filter = 2
 
 [node name="Cell" type="Control" parent="." unique_id=1620166114]
 layout_mode = 1
@@ -88,6 +109,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="CellBody" type="ColorRect" parent="Cell" unique_id=23919256]
@@ -105,7 +127,6 @@ offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x782j")
-click_power = null
 metadata/_edit_use_anchors_ = true
 
 [node name="CellNucleus" type="ColorRect" parent="Cell/CellBody" unique_id=3479582]
@@ -151,3 +172,5 @@ metadata/_edit_lock_ = true
 libraries/ = SubResource("AnimationLibrary_7g3jn")
 autoplay = &"attack_cell"
 speed_scale = 4.0
+
+[editable path="Stage UI"]

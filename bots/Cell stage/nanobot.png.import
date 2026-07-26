@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0rh5k0sfh1v0"
-path="res://.godot/imported/8-bit-graphics-pixels-scene-with-city-sunset_23-2151120910.jpg-c33fee794fe944eb39ff6a9c86ec0e69.ctex"
+uid="uid://dmlumupsbgr3g"
+path="res://.godot/imported/nanobot.png-9b31a258b485e2c8449ef0a5100f53b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://8-bit-graphics-pixels-scene-with-city-sunset_23-2151120910.jpg"
-dest_files=["res://.godot/imported/8-bit-graphics-pixels-scene-with-city-sunset_23-2151120910.jpg-c33fee794fe944eb39ff6a9c86ec0e69.ctex"]
+source_file="res://bots/Cell stage/nanobot.png"
+dest_files=["res://.godot/imported/nanobot.png-9b31a258b485e2c8449ef0a5100f53b5.ctex"]
 
 [params]
 

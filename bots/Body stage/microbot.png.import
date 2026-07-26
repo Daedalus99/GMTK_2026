@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmlumupsbgr3g"
-path="res://.godot/imported/nanobot.png-40d8b52d0644e46753a00aa1040464c8.ctex"
+uid="uid://dx7jd0cfekmjr"
+path="res://.godot/imported/microbot.png-4c12263eb3a985dfde5f624ade8d8af8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bots/nanobot.png"
-dest_files=["res://.godot/imported/nanobot.png-40d8b52d0644e46753a00aa1040464c8.ctex"]
+source_file="res://bots/Body stage/microbot.png"
+dest_files=["res://.godot/imported/microbot.png-4c12263eb3a985dfde5f624ade8d8af8.ctex"]
 
 [params]
 

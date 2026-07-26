@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ware" format=3 uid="uid://vr23wel0ujj7"]
+
+[ext_resource type="Texture2D" uid="uid://bm771rnl68nmj" path="res://bots/Body stage/neurobot.png" id="1_l328g"]
+[ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="2_hhdl8"]
+
+[resource]
+script = ExtResource("2_hhdl8")
+name = "Neurobot"
+cost = 1111
+png = ExtResource("1_l328g")
+dps = 1111.0
+metadata/_custom_type_script = "uid://c8orbrt5nx742"

@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="1_k3rfs"]
 [ext_resource type="Texture2D" uid="uid://b5oiqtslcc740" path="res://currency/cell.png" id="2_82xt7"]
+[ext_resource type="Resource" uid="uid://ox50mkj88ysg" path="res://bots/Body stage/microbot.tres" id="2_qt26v"]
 [ext_resource type="Script" uid="uid://bx2co26w5fu3g" path="res://stages/stage.gd" id="2_xlcmj"]
+[ext_resource type="Resource" uid="uid://0yoreiwqpepl" path="res://bots/Body stage/picklebot.tres" id="3_am5i5"]
+[ext_resource type="PackedScene" uid="uid://jj8xitmovmt4" path="res://Body.tscn" id="4_82xt7"]
+[ext_resource type="Resource" uid="uid://hyydcass0a7i" path="res://bots/Body stage/osteobot.tres" id="4_u00ex"]
+[ext_resource type="Resource" uid="uid://vr23wel0ujj7" path="res://bots/Body stage/neurobot.tres" id="5_dvr5n"]
 
 [resource]
 script = ExtResource("2_xlcmj")
@@ -10,5 +15,7 @@ name = "Body Stage"
 metric_name = "Cells Remaining"
 transition_message = "Convert the human's cells into nanobots!"
 starting_amount = 10000000.0
+available_wares = Array[ExtResource("1_k3rfs")]([ExtResource("2_qt26v"), ExtResource("3_am5i5"), ExtResource("4_u00ex"), ExtResource("5_dvr5n")])
 currency_png = ExtResource("2_82xt7")
+stage_scene = ExtResource("4_82xt7")
 metadata/_custom_type_script = "uid://bx2co26w5fu3g"

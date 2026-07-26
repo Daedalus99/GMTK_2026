@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://com7vgy0ee8lv"
-path="res://.godot/imported/firebot.png-3a30af225a51df866359a0818c023ff5.ctex"
+uid="uid://cfyd4gd0sg6wc"
+path="res://.godot/imported/venombot.png-d39a7e2582625cf8dbefc83091920dd9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bots/firebot.png"
-dest_files=["res://.godot/imported/firebot.png-3a30af225a51df866359a0818c023ff5.ctex"]
+source_file="res://bots/Cell stage/venombot.png"
+dest_files=["res://.godot/imported/venombot.png-d39a7e2582625cf8dbefc83091920dd9.ctex"]
 
 [params]
 

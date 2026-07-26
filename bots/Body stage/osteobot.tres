@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ware" format=3 uid="uid://hyydcass0a7i"]
+
+[ext_resource type="Texture2D" uid="uid://unvcu47wqrp2" path="res://bots/Body stage/osteobot.png" id="1_aan3b"]
+[ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="2_ff1jj"]
+
+[resource]
+script = ExtResource("2_ff1jj")
+name = "Osteobot"
+cost = 2000
+png = ExtResource("1_aan3b")
+dps = 125.0
+metadata/_custom_type_script = "uid://c8orbrt5nx742"
