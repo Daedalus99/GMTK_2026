@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bimedjtfuv1yx"
-path="res://.godot/imported/meat cube.png-817a6a7cd3e377b73f3d7f37495d511d.ctex"
+path="res://.godot/imported/meat cube.png-7bff39e1fde53f096945f6e806df7776.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://meat cube.png"
-dest_files=["res://.godot/imported/meat cube.png-817a6a7cd3e377b73f3d7f37495d511d.ctex"]
+source_file="res://currency/meat cube.png"
+dest_files=["res://.godot/imported/meat cube.png-7bff39e1fde53f096945f6e806df7776.ctex"]
 
 [params]
 

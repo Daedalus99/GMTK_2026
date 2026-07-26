@@ -1,6 +1,6 @@
 extends ColorRect
 
-func _process(delta):
+func _process(_delta):
 	if material is ShaderMaterial:
 		# Usamos la función de Godot 4
 		material.set_shader_parameter("resolution", get_viewport_rect().size)

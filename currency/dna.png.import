@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5oiqtslcc740"
-path="res://.godot/imported/cell.png-d2e896f835a3e7099cb9e14019efc1fe.ctex"
+uid="uid://cwbgc4hydyi8m"
+path="res://.godot/imported/dna.png-d76e80f5435b8382f820cca43d4bce1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cell.png"
-dest_files=["res://.godot/imported/cell.png-d2e896f835a3e7099cb9e14019efc1fe.ctex"]
+source_file="res://currency/dna.png"
+dest_files=["res://.godot/imported/dna.png-d76e80f5435b8382f820cca43d4bce1b.ctex"]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8orbrt5nx742" path="res://ware.gd" id="1_o4t21"]
 [ext_resource type="Script" uid="uid://bx2co26w5fu3g" path="res://stages/stage.gd" id="2_ia4cw"]
-[ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://dna.png" id="2_tx3dy"]
+[ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://currency/dna.png" id="2_tx3dy"]
 [ext_resource type="PackedScene" uid="uid://p70nh78dvtsh" path="res://Cell.tscn" id="4_mdke5"]
 
 [resource]

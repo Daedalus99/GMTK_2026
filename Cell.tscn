@@ -1,24 +1,9 @@
 [gd_scene format=3 uid="uid://p70nh78dvtsh"]
 
-[ext_resource type="Script" uid="uid://duth074bs3jyf" path="res://currency_display.gd" id="1_a755x"]
-[ext_resource type="Shader" uid="uid://mq0nxenriluj" path="res://bubbles.gdshader" id="1_ksgwh"]
+[ext_resource type="PackedScene" uid="uid://b74cv1sv0fm8s" path="res://stage_ui.tscn" id="1_hqjpw"]
 [ext_resource type="Script" uid="uid://t1whjqingmjx" path="res://cell.gd" id="1_x782j"]
 [ext_resource type="Shader" uid="uid://cn4baldtebqjq" path="res://wiggly_blob.gdshader" id="1_yborn"]
-[ext_resource type="Texture2D" uid="uid://dc4v0xm2h68wt" path="res://bubbles.png" id="2_a8024"]
-[ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://dna.png" id="4_hqjpw"]
 [ext_resource type="Script" uid="uid://bqibbmigy1my3" path="res://circle_container.gd" id="7_a755x"]
-[ext_resource type="PackedScene" uid="uid://cb53jqpqewn46" path="res://shop ui.tscn" id="9_sij6d"]
-[ext_resource type="Script" uid="uid://dvn3jb68x0lsn" path="res://objective_tracker.gd" id="10_vkkua"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
-shader = ExtResource("1_ksgwh")
-shader_parameter/bottom_color = Color(0.32630295, 0, 0.120675005, 1)
-shader_parameter/top_color = Color(0.5658167, 0.6612455, 1, 1)
-shader_parameter/tex = ExtResource("2_a8024")
-shader_parameter/layer_count = 17
-shader_parameter/time_scale = 0.050000002375
-shader_parameter/base_intensity = 0.1110000052725
-shader_parameter/size = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cell"]
 shader = ExtResource("1_yborn")
@@ -93,12 +78,10 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Background" type="ColorRect" parent="." unique_id=1848765191]
-material = SubResource("ShaderMaterial_6shm3")
+[node name="Stage UI" parent="." unique_id=187739743 instance=ExtResource("1_hqjpw")]
 layout_mode = 0
-offset_right = 1154.0
-offset_bottom = 655.0
-metadata/_edit_lock_ = true
+offset_left = 2.0
+offset_right = 42.0
 
 [node name="Cell" type="Control" parent="." unique_id=1620166114]
 layout_mode = 1
@@ -169,61 +152,3 @@ metadata/_edit_lock_ = true
 libraries/ = SubResource("AnimationLibrary_7g3jn")
 autoplay = &"attack_cell"
 speed_scale = 4.0
-
-[node name="ShopUi" parent="." unique_id=2023012564 node_paths=PackedStringArray("ware_spawn_container") instance=ExtResource("9_sij6d")]
-custom_minimum_size = Vector2(0, 128)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -571.0
-offset_top = -127.0
-offset_right = 571.0
-offset_bottom = 1.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-ware_spawn_container = NodePath("../Cell/CellBody/CircleContainer")
-
-[node name="Dna" type="Sprite2D" parent="ShopUi" unique_id=277500367]
-texture_filter = 1
-position = Vector2(51.999992, 68.00006)
-scale = Vector2(1.015625, 1.0622133)
-texture = ExtResource("4_hqjpw")
-script = ExtResource("1_a755x")
-
-[node name="biomass_count" type="Label" parent="ShopUi/Dna" unique_id=59567132]
-offset_left = 10.830778
-offset_top = -43.305862
-offset_right = 109.83078
-offset_bottom = 17.694138
-theme_override_font_sizes/font_size = 34
-text = "x0"
-
-[node name="progress_display" type="VBoxContainer" parent="." unique_id=1985471968]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("10_vkkua")
-
-[node name="objective_hp" type="HBoxContainer" parent="progress_display" unique_id=394909795]
-layout_mode = 2
-
-[node name="display_label" type="Label" parent="progress_display/objective_hp" unique_id=1067100771]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 45
-text = "Cell-wall integrity:"
-
-[node name="amount" type="Label" parent="progress_display/objective_hp" unique_id=183256879]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0.56, 0.112000026, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 45
-text = "100.0%"
-
-[node name="dps" type="Label" parent="progress_display" unique_id=884741797]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
-text = "00.xxx% per second"

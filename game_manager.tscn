@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://c21bhhlp0ffie"]
 
 [ext_resource type="Script" uid="uid://bx3o8yvhih8ao" path="res://GameManager.gd" id="1_70yv6"]
+[ext_resource type="Script" uid="uid://bx2co26w5fu3g" path="res://stages/stage.gd" id="2_d5upp"]
+[ext_resource type="Resource" uid="uid://cxnukdrrxva8o" path="res://stages/Cell_Stage.tres" id="3_vk86k"]
+[ext_resource type="Resource" uid="uid://dg83xkxk455t7" path="res://stages/Body_stage.tres" id="4_shwjl"]
 
 [node name="Game Manager" type="Node" unique_id=554052361]
 script = ExtResource("1_70yv6")
+game_stages = Array[ExtResource("2_d5upp")]([ExtResource("3_vk86k"), ExtResource("4_shwjl")])

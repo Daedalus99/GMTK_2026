@@ -3,7 +3,7 @@ extends Control
 @export var wares: Array[Ware]
 @onready var ware_buttons_container: HBoxContainer = $Panel/HBoxContainer
 @onready var shop_button = preload("uid://bylhcilxnv7bj")
-@export var ware_spawn_container: Container
+@export var ware_spawn_container: SilhouetteFill
 
 var bought_count = 0
 var ware_purchase_counts = {}  # Track purchases per ware type
@@ -42,15 +42,11 @@ func _purchase(ware: Ware, button: Button):
 		update_button_text(button, ware)
 
 		# Spawn visual representation
-		if ware.scene or true:
-			# var ware_instance = ware.scene.instantiate() as Node2D
-			var ware_instance = TextureRect.new()
+		if ware_spawn_container is SilhouetteFill:
+			(ware_spawn_container as SilhouetteFill).spawn_icon(ware.png)  
+		elif ware_spawn_container:
+			var ware_instance := TextureRect.new()
 			ware_instance.texture = ware.png
-			if ware_spawn_container:
-				ware_spawn_container.add_child(ware_instance)
-			else:
-				ware_instance.position = bought_count * Vector2(10, 10)
-				add_sibling(ware_instance)
-				print("spawned sprite at %s, cost was %d" % [ware_instance.position, current_cost])
+			ware_spawn_container.add_child(ware_instance)
 		else:
-			print("NO SCENE ASSOCIATED WITH THIS ITEM")
+			push_warning("shop.gd: no ware_spawn_container assigned.")

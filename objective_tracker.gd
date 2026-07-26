@@ -9,10 +9,10 @@ func _ready() -> void:
 	GameManager.salary_changed.connect(_update_dps)
 	
 	# 2. Set the initial text to the current currency value
-	_update_hp(GameManager.player_currency)
+	_update_hp(floor(GameManager.player_currency))
 	_update_dps(0)
 
-func _update_hp(amount: int) -> void:
+func _update_hp(_amount: float) -> void:
 	var percent = 100* (GameManager.curr_objective_hp / GameManager.base_objective_hp)
 	percent_label.text = "%.1f%%" % percent
 

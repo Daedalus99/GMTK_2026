@@ -6,19 +6,21 @@ var level = 1
 var salary: float = 0 # currency per second.
 var payment_frequency: = 0.5
 @onready var base_objective_hp: float = 1_000_000
+var timer_set: bool = false
+@export var game_stages: Array[Stage]
 
 var curr_objective_hp: float
 
 # Signals for UI updates
-signal currency_changed(new_amount)
-signal salary_changed(new_amount)
+signal currency_changed(new_amount: float)
+signal salary_changed(new_amount: float)
 signal level_up(new_level)
 
 func _ready():
 	print("GameManager ready!")
 	# Initialize game state
 	reset_game()
-	setup_salary_timer()
+
 
 func reset_game():
 	curr_objective_hp = base_objective_hp
@@ -60,6 +62,9 @@ func _pay_salary():
 	curr_objective_hp -= salary*payment_frequency
 
 func increase_salary(amount: float):
+	if not timer_set:
+		setup_salary_timer()
+		
 	print("Increasing salary. %f --> %f" % [salary, salary+amount])
 	salary += amount
 	salary_changed.emit(salary)
@@ -73,6 +78,7 @@ func load_game():
 	pass
 	
 func setup_salary_timer():
+	timer_set = true
 	var timer = Timer.new()
 	timer.wait_time = payment_frequency
 	timer.autostart = true

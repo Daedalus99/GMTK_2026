@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://b74cv1sv0fm8s"]
+
+[ext_resource type="Shader" uid="uid://mq0nxenriluj" path="res://bubbles.gdshader" id="1_qoxb4"]
+[ext_resource type="Texture2D" uid="uid://dc4v0xm2h68wt" path="res://bubbles.png" id="2_u71rs"]
+[ext_resource type="PackedScene" uid="uid://cb53jqpqewn46" path="res://shop ui.tscn" id="3_fr8ke"]
+[ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://currency/dna.png" id="4_oj415"]
+[ext_resource type="Script" uid="uid://duth074bs3jyf" path="res://currency/currency_display.gd" id="5_hmboq"]
+[ext_resource type="Script" uid="uid://dvn3jb68x0lsn" path="res://objective_tracker.gd" id="6_pcxdm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
+shader = ExtResource("1_qoxb4")
+shader_parameter/bottom_color = Color(0.32630295, 0, 0.120675005, 1)
+shader_parameter/top_color = Color(0.5658167, 0.6612455, 1, 1)
+shader_parameter/tex = ExtResource("2_u71rs")
+shader_parameter/layer_count = 17
+shader_parameter/time_scale = 0.050000002375
+shader_parameter/base_intensity = 0.1110000052725
+shader_parameter/size = 1.0
+
+[node name="Stage UI" type="Control" unique_id=187739743]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="." unique_id=1662449333]
+material = SubResource("ShaderMaterial_6shm3")
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 655.0
+metadata/_edit_lock_ = true
+
+[node name="ShopUi" parent="." unique_id=2018579107 instance=ExtResource("3_fr8ke")]
+z_index = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.0
+offset_top = 481.0
+offset_right = 1127.0
+offset_bottom = 609.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Dna" type="Sprite2D" parent="ShopUi" unique_id=1100131787]
+texture_filter = 1
+position = Vector2(51.999992, 68.00006)
+scale = Vector2(1.015625, 1.0622133)
+texture = ExtResource("4_oj415")
+script = ExtResource("5_hmboq")
+
+[node name="biomass_count" type="Label" parent="ShopUi/Dna" unique_id=911398975]
+offset_left = 10.830778
+offset_top = -43.305862
+offset_right = 109.83078
+offset_bottom = 17.694138
+theme_override_font_sizes/font_size = 34
+text = "x0"
+
+[node name="progress_display" type="VBoxContainer" parent="." unique_id=883238543]
+layout_mode = 0
+offset_right = 548.0
+offset_bottom = 109.0
+script = ExtResource("6_pcxdm")
+
+[node name="objective_hp" type="HBoxContainer" parent="progress_display" unique_id=1143825827]
+layout_mode = 2
+
+[node name="display_label" type="Label" parent="progress_display/objective_hp" unique_id=1879814316]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 45
+text = "Cell-wall integrity:"
+
+[node name="amount" type="Label" parent="progress_display/objective_hp" unique_id=1505787903]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0.56, 0.112000026, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 45
+text = "100.0%"
+
+[node name="dps" type="Label" parent="progress_display" unique_id=846037142]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "00.xxx% per second"

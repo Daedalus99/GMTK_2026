@@ -7,7 +7,7 @@
 [ext_resource type="Shader" uid="uid://dd0gc6oc1arya" path="res://cell_grid.gdshader" id="4_dy7ct"]
 [ext_resource type="Script" uid="uid://1nf36h0gms3q" path="res://addons/maaacks_menus_template/base/nodes/utilities/capture_focus.gd" id="5_0k4wn"]
 [ext_resource type="Script" uid="uid://dmkubt2nsnsbn" path="res://addons/maaacks_menus_template/base/nodes/labels/config_version_label.gd" id="6_j5v2v"]
-[ext_resource type="Script" uid="uid://ctf1oj0fn7263" path="res://background.gd" id="7_0o4t1"]
+[ext_resource type="Script" uid="uid://ctf1oj0fn7263" path="res://menu_background.gd" id="7_0o4t1"]
 [ext_resource type="PackedScene" uid="uid://cwt4p3bufkke5" path="res://addons/maaacks_menus_template/base/nodes/windows/confirmation_overlaid_window.tscn" id="7_iotk1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
@@ -27,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qe12f")
-game_scene_path = "uid://p70nh78dvtsh"
+game_scene_path = "uid://jj8xitmovmt4"
 
 [node name="UISoundController" type="Node" parent="." unique_id=1619985599]
 script = ExtResource("2_8qtwp")
