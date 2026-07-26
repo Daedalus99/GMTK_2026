@@ -79,9 +79,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="Stage UI" parent="." unique_id=187739743 instance=ExtResource("1_hqjpw")]
-layout_mode = 0
-offset_left = 2.0
-offset_right = 42.0
+layout_mode = 1
 
 [node name="Cell" type="Control" parent="." unique_id=1620166114]
 layout_mode = 1
@@ -107,6 +105,7 @@ offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x782j")
+click_power = null
 metadata/_edit_use_anchors_ = true
 
 [node name="CellNucleus" type="ColorRect" parent="Cell/CellBody" unique_id=3479582]

@@ -1,7 +1,7 @@
 # currency_ui.gd
 extends Node
 
-@onready var currency_label: Label = $biomass_count
+@onready var currency_label: Label = $"../biomass_count"
 
 # Store the last known amount to calculate the difference
 var _last_amount: float = 0.0

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://jj8xitmovmt4"]
 
 [ext_resource type="PackedScene" uid="uid://b74cv1sv0fm8s" path="res://stage_ui.tscn" id="1_g2rrn"]
+[ext_resource type="Script" uid="uid://di61qy5ca84bl" path="res://clickable_target.gd" id="2_qmdwo"]
 [ext_resource type="Shader" uid="uid://b80qhlvlo8be2" path="res://silhouette_fill.gdshader" id="2_vpsov"]
 [ext_resource type="Texture2D" uid="uid://dmlumupsbgr3g" path="res://bots/nanobot.png" id="5_qmdwo"]
 [ext_resource type="Texture2D" uid="uid://crgg4hvtfuyxa" path="res://bots/drillerbot.png" id="6_84doa"]
@@ -23,53 +24,92 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Stage UI" parent="." unique_id=187739743 instance=ExtResource("1_g2rrn")]
-layout_mode = 0
-
-[node name="ShopUi" parent="Stage UI" index="1" unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container")]
-ware_spawn_container = NodePath("../../Body")
+layout_mode = 1
 
 [node name="Body" type="Control" parent="." unique_id=1803973143]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 138.0
+offset_bottom = -138.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_qmdwo")
+
+[node name="SilhouetteDisplay" type="TextureRect" parent="Body" unique_id=883698712]
+clip_children = 2
+material = SubResource("ShaderMaterial_57rr8")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -567.1111
+offset_top = -183.0
+offset_right = 567.1111
+offset_bottom = 183.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SilhouetteDisplay" type="Sprite2D" parent="Body" unique_id=1114470490]
-clip_children = 2
-material = SubResource("ShaderMaterial_57rr8")
-position = Vector2(1, 7)
 texture = SubResource("ViewportTexture_4q027")
+expand_mode = 1
+stretch_mode = 3
 
-[node name="TestSprite" type="Sprite2D" parent="Body/SilhouetteDisplay" unique_id=1248963892]
-position = Vector2(-96.99997, 114.99997)
+[node name="TestSprite" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1844905313]
+layout_mode = 0
+offset_left = 523.0
+offset_top = 314.99997
+offset_right = 587.0
+offset_bottom = 378.99997
 texture = ExtResource("5_qmdwo")
 
-[node name="TestSprite2" type="Sprite2D" parent="Body/SilhouetteDisplay" unique_id=1879914679]
-position = Vector2(358, 69)
+[node name="TestSprite2" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1706746977]
+layout_mode = 0
+offset_left = 978.0
+offset_top = 269.0
+offset_right = 1042.0
+offset_bottom = 333.0
 texture = ExtResource("6_84doa")
 
-[node name="TestSprite3" type="Sprite2D" parent="Body/SilhouetteDisplay" unique_id=309962122]
-position = Vector2(-22, -118)
+[node name="TestSprite3" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1587383379]
+layout_mode = 0
+offset_left = 598.0
+offset_top = 82.0
+offset_right = 662.0
+offset_bottom = 146.0
 texture = ExtResource("7_6fdik")
 
-[node name="TestSprite4" type="Sprite2D" parent="Body/SilhouetteDisplay" unique_id=1710477226]
-position = Vector2(-200, -7.0000305)
+[node name="TestSprite4" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1957286743]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 192.99997
+offset_right = 484.0
+offset_bottom = 256.99997
 texture = ExtResource("8_j8h7j")
 
 [node name="SubViewport" type="SubViewport" parent="Body" unique_id=1593411804]
 transparent_bg = true
-size = Vector2i(1150, 512)
+size = Vector2i(1152, 648)
 
-[node name="Silhouette" type="Sprite2D" parent="Body/SubViewport" unique_id=1227060025]
+[node name="Silhouette" type="TextureRect" parent="Body/SubViewport" unique_id=1178983557]
 visibility_layer = 3
 texture_filter = 1
-position = Vector2(575, 256)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.568
+offset_top = -577.0686
+offset_right = 185.568
+offset_bottom = 577.0686
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 1.5707964
-scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("7_4q027")
+expand_mode = 4
+stretch_mode = 5
 
 [editable path="Stage UI"]
