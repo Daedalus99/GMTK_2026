@@ -2,33 +2,450 @@
 
 [ext_resource type="PackedScene" uid="uid://b74cv1sv0fm8s" path="res://stage_ui.tscn" id="1_hqjpw"]
 [ext_resource type="Script" uid="uid://t1whjqingmjx" path="res://cell.gd" id="1_x782j"]
-[ext_resource type="Shader" uid="uid://cn4baldtebqjq" path="res://wiggly_blob.gdshader" id="1_yborn"]
 [ext_resource type="Script" uid="uid://bqibbmigy1my3" path="res://circle_container.gd" id="7_a755x"]
 
+[sub_resource type="Shader" id="Shader_p3prn"]
+code = "shader_type canvas_item;
+
+uniform float wiggle_speed = 1.0;
+uniform float wiggle_amount = 0.1;
+uniform float pulse_amount = 1.0;
+uniform float timing_offset = 0.0;
+uniform float speed_mult = 1.0;
+uniform vec4 blob_color = vec4(0.8, 0.4, 0.6, 1.0);
+uniform vec4 core_color = vec4(1.0, 0.6, 0.8, 1.0);
+uniform float size = 0.4;
+uniform float wall_thickness = 0.05;
+uniform vec2 node_world_location;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = UV - 0.5; // Center the blob
+    float t = (TIME+timing_offset) * wiggle_speed * speed_mult;
+    
+    // Create wiggly distortion using multiple sine waves
+    float angle = atan(uv.y, uv.x);
+    float radius = length(uv);
+    
+    // Add wiggle to radius using multiple frequencies with seed offset
+	    float seed = hash(node_world_location * 0.01) * 20.0;    float wiggle = sin(angle * 3.0 + t + seed) * 0.3;
+    wiggle += sin(angle * 7.0 - t * 1.5 + seed * 1.7) * 0.2;
+    wiggle += sin(angle * 11.0 + t * 0.8 + seed * 2.3) * 0.15;
+    wiggle *= wiggle_amount;
+    
+    // Pulsing size variation
+    float pulse = 1.0 + sin(t * 2.0) * 0.1 * pulse_amount;
+    float blob_radius = size * pulse;
+    
+    // Distance from center with wiggle applied
+    float dist = radius - wiggle;
+    
+    // Main blob outer edge
+    float outer_mask = 1.0 - smoothstep(blob_radius - 0.005, blob_radius + 0.005, dist);
+    
+    // Inner edge for cell wall
+    float inner_radius = blob_radius - wall_thickness;
+    float inner_mask = 1.0 - smoothstep(inner_radius - 0.005, inner_radius + 0.005, dist);
+    
+    // Cell wall is the difference between outer and inner
+    float wall_mask = outer_mask - inner_mask;
+    
+    // Interior fill
+    vec4 final_color = core_color * inner_mask;
+    
+    // Add cell wall
+    final_color += blob_color * wall_mask;
+    
+    // Set alpha
+    final_color.a = outer_mask;
+    
+    COLOR = final_color;
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cell"]
-shader = ExtResource("1_yborn")
+shader = SubResource("Shader_p3prn")
 shader_parameter/wiggle_speed = 1.0
 shader_parameter/wiggle_amount = 0.04
 shader_parameter/pulse_amount = 0.1
+shader_parameter/timing_offset = 0.0
+shader_parameter/speed_mult = 1.0
 shader_parameter/blob_color = Vector4(0.1, 0.305, 0.615, 1)
 shader_parameter/core_color = Vector4(0, 0.725, 0.8, 0.8)
 shader_parameter/size = 0.49
 shader_parameter/wall_thickness = 0.04
-shader_parameter/wiggle_seed = 0.0
-shader_parameter/auto_seed = false
 shader_parameter/node_world_location = Vector2(0, 0)
 
+[sub_resource type="Shader" id="Shader_hqjpw"]
+code = "shader_type canvas_item;
+
+uniform float wiggle_speed = 1.0;
+uniform float wiggle_amount = 0.1;
+uniform float pulse_amount = 1.0;
+uniform float timing_offset = 0.0;
+uniform float speed_mult = 1.0;
+uniform vec4 blob_color = vec4(0.8, 0.4, 0.6, 1.0);
+uniform vec4 core_color = vec4(1.0, 0.6, 0.8, 1.0);
+uniform float size = 0.4;
+uniform float wall_thickness = 0.05;
+uniform vec2 node_world_location;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = UV - 0.5; // Center the blob
+    float t = (TIME+timing_offset) * wiggle_speed * speed_mult;
+    
+    // Create wiggly distortion using multiple sine waves
+    float angle = atan(uv.y, uv.x);
+    float radius = length(uv);
+    
+    // Add wiggle to radius using multiple frequencies with seed offset
+	    float seed = hash(node_world_location * 0.01) * 20.0;    float wiggle = sin(angle * 3.0 + t + seed) * 0.3;
+    wiggle += sin(angle * 7.0 - t * 1.5 + seed * 1.7) * 0.2;
+    wiggle += sin(angle * 11.0 + t * 0.8 + seed * 2.3) * 0.15;
+    wiggle *= wiggle_amount;
+    
+    // Pulsing size variation
+    float pulse = 1.0 + sin(t * 2.0) * 0.1 * pulse_amount;
+    float blob_radius = size * pulse;
+    
+    // Distance from center with wiggle applied
+    float dist = radius - wiggle;
+    
+    // Main blob outer edge
+    float outer_mask = 1.0 - smoothstep(blob_radius - 0.005, blob_radius + 0.005, dist);
+    
+    // Inner edge for cell wall
+    float inner_radius = blob_radius - wall_thickness;
+    float inner_mask = 1.0 - smoothstep(inner_radius - 0.005, inner_radius + 0.005, dist);
+    
+    // Cell wall is the difference between outer and inner
+    float wall_mask = outer_mask - inner_mask;
+    
+    // Interior fill
+    vec4 final_color = core_color * inner_mask;
+    
+    // Add cell wall
+    final_color += blob_color * wall_mask;
+    
+    // Set alpha
+    final_color.a = outer_mask;
+    
+    COLOR = final_color;
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a8024"]
-shader = ExtResource("1_yborn")
+shader = SubResource("Shader_hqjpw")
 shader_parameter/wiggle_speed = 1.0
 shader_parameter/wiggle_amount = 0.02
 shader_parameter/pulse_amount = 0.5
+shader_parameter/timing_offset = 0.0
+shader_parameter/speed_mult = 1.0
 shader_parameter/blob_color = Vector4(0.85, 0.1, 0.675, 1)
 shader_parameter/core_color = Vector4(0.855, 0.515, 0.68, 1)
 shader_parameter/size = 0.475
 shader_parameter/wall_thickness = 0.05
-shader_parameter/wiggle_seed = 0.0
-shader_parameter/auto_seed = false
+shader_parameter/node_world_location = Vector2(0, 0)
+
+[sub_resource type="Shader" id="Shader_ksgwh"]
+code = "shader_type canvas_item;
+
+uniform float wiggle_speed = 1.0;
+uniform float wiggle_amount = 0.1;
+uniform float pulse_amount = 1.0;
+uniform float timing_offset = 0.0;
+uniform float speed_mult = 1.0;
+uniform vec4 blob_color = vec4(0.8, 0.4, 0.6, 1.0);
+uniform vec4 core_color = vec4(1.0, 0.6, 0.8, 1.0);
+uniform float size = 0.4;
+uniform float wall_thickness = 0.05;
+uniform vec2 node_world_location;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = UV - 0.5; // Center the blob
+    float t = (TIME+timing_offset) * wiggle_speed * speed_mult;
+    
+    // Create wiggly distortion using multiple sine waves
+    float angle = atan(uv.y, uv.x);
+    float radius = length(uv);
+    
+    // Add wiggle to radius using multiple frequencies with seed offset
+	    float seed = hash(node_world_location * 0.01) * 20.0;    float wiggle = sin(angle * 3.0 + t + seed) * 0.3;
+    wiggle += sin(angle * 7.0 - t * 1.5 + seed * 1.7) * 0.2;
+    wiggle += sin(angle * 11.0 + t * 0.8 + seed * 2.3) * 0.15;
+    wiggle *= wiggle_amount;
+    
+    // Pulsing size variation
+    float pulse = 1.0 + sin(t * 2.0) * 0.1 * pulse_amount;
+    float blob_radius = size * pulse;
+    
+    // Distance from center with wiggle applied
+    float dist = radius - wiggle;
+    
+    // Main blob outer edge
+    float outer_mask = 1.0 - smoothstep(blob_radius - 0.005, blob_radius + 0.005, dist);
+    
+    // Inner edge for cell wall
+    float inner_radius = blob_radius - wall_thickness;
+    float inner_mask = 1.0 - smoothstep(inner_radius - 0.005, inner_radius + 0.005, dist);
+    
+    // Cell wall is the difference between outer and inner
+    float wall_mask = outer_mask - inner_mask;
+    
+    // Interior fill
+    vec4 final_color = core_color * inner_mask;
+    
+    // Add cell wall
+    final_color += blob_color * wall_mask;
+    
+    // Set alpha
+    final_color.a = outer_mask;
+    
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x782j"]
+shader = SubResource("Shader_ksgwh")
+shader_parameter/wiggle_speed = 1.0
+shader_parameter/wiggle_amount = 0.02
+shader_parameter/pulse_amount = 0.5
+shader_parameter/timing_offset = 0.0
+shader_parameter/speed_mult = 1.0
+shader_parameter/blob_color = Vector4(0.9, 0.4, 0.04, 1)
+shader_parameter/core_color = Vector4(1, 0.5, 0.1, 1)
+shader_parameter/size = 0.475
+shader_parameter/wall_thickness = 0.05
+shader_parameter/node_world_location = Vector2(0, 0)
+
+[sub_resource type="Shader" id="Shader_a8024"]
+code = "shader_type canvas_item;
+
+uniform float wiggle_speed = 1.0;
+uniform float wiggle_amount = 0.1;
+uniform float pulse_amount = 1.0;
+uniform float timing_offset = 0.0;
+uniform float speed_mult = 1.0;
+uniform vec4 blob_color = vec4(0.8, 0.4, 0.6, 1.0);
+uniform vec4 core_color = vec4(1.0, 0.6, 0.8, 1.0);
+uniform float size = 0.4;
+uniform float wall_thickness = 0.05;
+uniform vec2 node_world_location;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = UV - 0.5; // Center the blob
+    float t = (TIME+timing_offset) * wiggle_speed * speed_mult;
+    
+    // Create wiggly distortion using multiple sine waves
+    float angle = atan(uv.y, uv.x);
+    float radius = length(uv);
+    
+    // Add wiggle to radius using multiple frequencies with seed offset
+	    float seed = hash(node_world_location * 0.01) * 20.0;    float wiggle = sin(angle * 3.0 + t + seed) * 0.3;
+    wiggle += sin(angle * 7.0 - t * 1.5 + seed * 1.7) * 0.2;
+    wiggle += sin(angle * 11.0 + t * 0.8 + seed * 2.3) * 0.15;
+    wiggle *= wiggle_amount;
+    
+    // Pulsing size variation
+    float pulse = 1.0 + sin(t * 2.0) * 0.1 * pulse_amount;
+    float blob_radius = size * pulse;
+    
+    // Distance from center with wiggle applied
+    float dist = radius - wiggle;
+    
+    // Main blob outer edge
+    float outer_mask = 1.0 - smoothstep(blob_radius - 0.005, blob_radius + 0.005, dist);
+    
+    // Inner edge for cell wall
+    float inner_radius = blob_radius - wall_thickness;
+    float inner_mask = 1.0 - smoothstep(inner_radius - 0.005, inner_radius + 0.005, dist);
+    
+    // Cell wall is the difference between outer and inner
+    float wall_mask = outer_mask - inner_mask;
+    
+    // Interior fill
+    vec4 final_color = core_color * inner_mask;
+    
+    // Add cell wall
+    final_color += blob_color * wall_mask;
+    
+    // Set alpha
+    final_color.a = outer_mask;
+    
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a755x"]
+shader = SubResource("Shader_a8024")
+shader_parameter/wiggle_speed = 1.0
+shader_parameter/wiggle_amount = 0.02
+shader_parameter/pulse_amount = 0.5
+shader_parameter/timing_offset = 0.0
+shader_parameter/speed_mult = 1.0
+shader_parameter/blob_color = Vector4(0.9, 0.4, 0.04, 1)
+shader_parameter/core_color = Vector4(1, 0.5, 0.1, 1)
+shader_parameter/size = 0.475
+shader_parameter/wall_thickness = 0.05
+shader_parameter/node_world_location = Vector2(0, 0)
+
+[sub_resource type="Shader" id="Shader_sij6d"]
+code = "shader_type canvas_item;
+
+uniform float wiggle_speed = 1.0;
+uniform float wiggle_amount = 0.1;
+uniform float pulse_amount = 1.0;
+uniform float timing_offset = 0.0;
+uniform float speed_mult = 1.0;
+uniform vec4 blob_color = vec4(0.8, 0.4, 0.6, 1.0);
+uniform vec4 core_color = vec4(1.0, 0.6, 0.8, 1.0);
+uniform float size = 0.4;
+uniform float wall_thickness = 0.05;
+uniform vec2 node_world_location;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = UV - 0.5; // Center the blob
+    float t = (TIME+timing_offset) * wiggle_speed * speed_mult;
+    
+    // Create wiggly distortion using multiple sine waves
+    float angle = atan(uv.y, uv.x);
+    float radius = length(uv);
+    
+    // Add wiggle to radius using multiple frequencies with seed offset
+	    float seed = hash(node_world_location * 0.01) * 20.0;    float wiggle = sin(angle * 3.0 + t + seed) * 0.3;
+    wiggle += sin(angle * 7.0 - t * 1.5 + seed * 1.7) * 0.2;
+    wiggle += sin(angle * 11.0 + t * 0.8 + seed * 2.3) * 0.15;
+    wiggle *= wiggle_amount;
+    
+    // Pulsing size variation
+    float pulse = 1.0 + sin(t * 2.0) * 0.1 * pulse_amount;
+    float blob_radius = size * pulse;
+    
+    // Distance from center with wiggle applied
+    float dist = radius - wiggle;
+    
+    // Main blob outer edge
+    float outer_mask = 1.0 - smoothstep(blob_radius - 0.005, blob_radius + 0.005, dist);
+    
+    // Inner edge for cell wall
+    float inner_radius = blob_radius - wall_thickness;
+    float inner_mask = 1.0 - smoothstep(inner_radius - 0.005, inner_radius + 0.005, dist);
+    
+    // Cell wall is the difference between outer and inner
+    float wall_mask = outer_mask - inner_mask;
+    
+    // Interior fill
+    vec4 final_color = core_color * inner_mask;
+    
+    // Add cell wall
+    final_color += blob_color * wall_mask;
+    
+    // Set alpha
+    final_color.a = outer_mask;
+    
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkkua"]
+shader = SubResource("Shader_sij6d")
+shader_parameter/wiggle_speed = 1.0
+shader_parameter/wiggle_amount = 0.02
+shader_parameter/pulse_amount = 0.5
+shader_parameter/timing_offset = 0.0
+shader_parameter/speed_mult = 1.0
+shader_parameter/blob_color = Vector4(0.2, 0.5, 0.1, 1)
+shader_parameter/core_color = Vector4(0.2, 1, 0.5, 1)
+shader_parameter/size = 0.475
+shader_parameter/wall_thickness = 0.05
+shader_parameter/node_world_location = Vector2(0, 0)
+
+[sub_resource type="Shader" id="Shader_7g3jn"]
+code = "shader_type canvas_item;
+
+uniform float wiggle_speed = 1.0;
+uniform float wiggle_amount = 0.1;
+uniform float pulse_amount = 1.0;
+uniform float timing_offset = 0.0;
+uniform float speed_mult = 1.0;
+uniform vec4 blob_color = vec4(0.8, 0.4, 0.6, 1.0);
+uniform vec4 core_color = vec4(1.0, 0.6, 0.8, 1.0);
+uniform float size = 0.4;
+uniform float wall_thickness = 0.05;
+uniform vec2 node_world_location;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = UV - 0.5; // Center the blob
+    float t = (TIME+timing_offset) * wiggle_speed * speed_mult;
+    
+    // Create wiggly distortion using multiple sine waves
+    float angle = atan(uv.y, uv.x);
+    float radius = length(uv);
+    
+    // Add wiggle to radius using multiple frequencies with seed offset
+	    float seed = hash(node_world_location * 0.01) * 20.0;    float wiggle = sin(angle * 3.0 + t + seed) * 0.3;
+    wiggle += sin(angle * 7.0 - t * 1.5 + seed * 1.7) * 0.2;
+    wiggle += sin(angle * 11.0 + t * 0.8 + seed * 2.3) * 0.15;
+    wiggle *= wiggle_amount;
+    
+    // Pulsing size variation
+    float pulse = 1.0 + sin(t * 2.0) * 0.1 * pulse_amount;
+    float blob_radius = size * pulse;
+    
+    // Distance from center with wiggle applied
+    float dist = radius - wiggle;
+    
+    // Main blob outer edge
+    float outer_mask = 1.0 - smoothstep(blob_radius - 0.005, blob_radius + 0.005, dist);
+    
+    // Inner edge for cell wall
+    float inner_radius = blob_radius - wall_thickness;
+    float inner_mask = 1.0 - smoothstep(inner_radius - 0.005, inner_radius + 0.005, dist);
+    
+    // Cell wall is the difference between outer and inner
+    float wall_mask = outer_mask - inner_mask;
+    
+    // Interior fill
+    vec4 final_color = core_color * inner_mask;
+    
+    // Add cell wall
+    final_color += blob_color * wall_mask;
+    
+    // Set alpha
+    final_color.a = outer_mask;
+    
+    COLOR = final_color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sij6d"]
+shader = SubResource("Shader_7g3jn")
+shader_parameter/wiggle_speed = 1.0
+shader_parameter/wiggle_amount = 0.02
+shader_parameter/pulse_amount = 0.5
+shader_parameter/timing_offset = 0.0
+shader_parameter/speed_mult = 1.0
+shader_parameter/blob_color = Vector4(0.2, 0.5, 0.1, 1)
+shader_parameter/core_color = Vector4(0.2, 1, 0.5, 1)
+shader_parameter/size = 0.475
+shader_parameter/wall_thickness = 0.05
 shader_parameter/node_world_location = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_sij6d"]
@@ -93,9 +510,6 @@ ware_spawn_container = NodePath("../../Cell/CellBody/CircleContainer")
 [node name="CurrencyDisplay" parent="Stage UI/ShopUi" index="1" unique_id=1220917504]
 mouse_filter = 2
 
-[node name="Dna" parent="Stage UI/ShopUi/CurrencyDisplay" index="0" unique_id=307377816]
-mouse_filter = 2
-
 [node name="progress_display" parent="Stage UI" index="2" unique_id=883238543]
 mouse_filter = 2
 
@@ -144,6 +558,81 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(5.586, 5.901)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Mitochondria" type="ColorRect" parent="Cell/CellBody" unique_id=713504099]
+material = SubResource("ShaderMaterial_x782j")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.4780043
+anchor_top = -0.6930237
+anchor_right = 1.9999924
+anchor_bottom = -0.6930237
+offset_left = 306.4217
+offset_top = 310.27924
+offset_right = 478.52643
+offset_bottom = 608.3244
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.09749471, 0.10299253)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Mitochondria2" type="ColorRect" parent="Cell/CellBody" unique_id=1167212384]
+material = SubResource("ShaderMaterial_a755x")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.6959531
+anchor_top = -0.22379291
+anchor_right = 1.6448178
+anchor_bottom = -0.22379291
+offset_left = 306.4217
+offset_top = 310.27924
+offset_right = 478.52643
+offset_bottom = 608.3244
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.2880614
+scale = Vector2(0.097494625, 0.10299244)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Stringy" type="ColorRect" parent="Cell/CellBody" unique_id=369749860]
+material = SubResource("ShaderMaterial_vkkua")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.23586942
+anchor_top = -0.44920123
+anchor_right = -0.23586942
+anchor_bottom = -0.44920123
+offset_left = 306.4217
+offset_top = 310.27924
+offset_right = 478.52643
+offset_bottom = 608.3244
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.56802535
+scale = Vector2(0.09393506, 0.740764)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Stringy2" type="ColorRect" parent="Cell/CellBody" unique_id=1139499203]
+material = SubResource("ShaderMaterial_sij6d")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.3073971
+anchor_top = -6.763208
+anchor_right = -2.3073971
+anchor_bottom = -6.763208
+offset_left = 1089.9246
+offset_top = 2765.9202
+offset_right = 1262.0293
+offset_bottom = 3063.9653
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.31723177
+scale = Vector2(0.09393513, 0.74076474)
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 

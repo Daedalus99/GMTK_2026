@@ -53,7 +53,7 @@ func _load_stage(index: int) -> void:
 
 	print("Stage loaded: %s (hp: %s)" % [current_stage.name, base_objective_hp])
 	stage_changed.emit(current_stage)
-
+	
 	if not _initial_load:
 		if current_stage.stage_scene:
 			get_tree().change_scene_to_packed.call_deferred(current_stage.stage_scene)

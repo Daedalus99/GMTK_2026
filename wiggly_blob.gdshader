@@ -3,12 +3,12 @@ shader_type canvas_item;
 uniform float wiggle_speed = 1.0;
 uniform float wiggle_amount = 0.1;
 uniform float pulse_amount = 1.0;
+uniform float timing_offset = 0.0;
+uniform float speed_mult = 1.0;
 uniform vec4 blob_color = vec4(0.8, 0.4, 0.6, 1.0);
 uniform vec4 core_color = vec4(1.0, 0.6, 0.8, 1.0);
 uniform float size = 0.4;
 uniform float wall_thickness = 0.05;
-uniform float wiggle_seed = 0.0;
-uniform bool auto_seed = false;
 uniform vec2 node_world_location;
 
 float hash(vec2 p) {
@@ -17,7 +17,7 @@ float hash(vec2 p) {
 
 void fragment() {
     vec2 uv = UV - 0.5; // Center the blob
-    float t = TIME * wiggle_speed;
+    float t = (TIME+timing_offset) * wiggle_speed * speed_mult;
     
     // Create wiggly distortion using multiple sine waves
     float angle = atan(uv.y, uv.x);

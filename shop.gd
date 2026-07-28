@@ -4,7 +4,7 @@ extends Control
 @onready var ware_buttons_container: HBoxContainer = $Panel/HBoxContainer
 @onready var shop_button = preload("uid://bylhcilxnv7bj")
 @export var ware_spawn_container: Control
-
+@onready var currency_image: TextureRect = $CurrencyDisplay/CurrencySprite
 var bought_count = 0
 var ware_purchase_counts: Dictionary = {}
 @export var inflation_rate: float = 1.15
@@ -18,7 +18,7 @@ func _ready() -> void:
 	else:
 		_populate_wares(wares)
 	var c = Color.from_hsv(randf(), 1.0, 1.0)
-	var dark_c = Color.from_hsv(fposmod(c.h + 0.5, 1.0), c.s, 0.4)
+	var dark_c = Color.from_hsv(fposmod(c.h + randf(), 1.0), c.s, 0.4)
 	bg.material.set_shader_parameter("bottom_color", c)
 	bg.material.set_shader_parameter("top_color", dark_c)
 
@@ -28,6 +28,7 @@ func _on_stage_changed(stage: Stage) -> void:
 ## Clears the shop and repopulates it from the given Stage resource.
 func load_stage(stage: Stage) -> void:
 	_populate_wares(stage.available_wares)
+	currency_image.texture = stage.currency_png
 
 func _populate_wares(new_wares: Array[Ware]) -> void:
 	# Clear existing buttons.

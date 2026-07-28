@@ -19,7 +19,8 @@ metadata/_custom_type_script = "uid://c8orbrt5nx742"
 [resource]
 script = ExtResource("2_ia4cw")
 name = "Cell Stage"
-metric_name = "Cell-wall integrity:"
+metric_name = "Cell-wall integrity"
+show_progress_as_percent = true
 transition_message = "Attack the cell and breach its walls!"
 starting_amount = 2000000.0
 available_wares = Array[ExtResource("1_o4t21")]([SubResource("Resource_mxce3"), ExtResource("3_gop0u"), ExtResource("4_vrttx"), ExtResource("5_06tb4")])

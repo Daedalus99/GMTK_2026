@@ -1,8 +1,9 @@
 class_name Stage
 extends Resource
 
-@export var name: String = "new stage"
-@export var metric_name: String = "Percent remaining"
+@export var name: String = "NewStage"
+@export var metric_name: String = "Remaining"
+@export var show_progress_as_percent: bool = false
 @export_multiline var transition_message: String = ""
 @export var starting_amount: float = 100_000_000
 @export var available_wares: Array[Ware]

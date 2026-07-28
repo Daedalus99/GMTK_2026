@@ -11,19 +11,24 @@ extends ClickableTarget
 ## Pixels per second for newly spawned icons.
 @export var min_speed: float = 80.0
 @export var max_speed: float = 220.0
+@onready var sprite_container : TextureRect = $SilhouetteDisplay
 
 ## Velocity table keyed by child node instance id.
 var _velocities: Dictionary = {}
 
 
 func _ready() -> void:
-	child_entered_tree.connect(_on_child_entered)
+	# Connect to sprite_container's signal so we catch icons added there by the shop.
+	sprite_container.child_entered_tree.connect(_on_icon_added)
+	# Register any children already in the scene (test sprites etc).
+	for child in sprite_container.get_children():
+		_on_icon_added(child)
 
 
 func _process(delta: float) -> void:
-	var bounds := get_rect()  # Local rect: origin (0,0), size = self.size
+	var bounds_size := sprite_container.size
 
-	for child in get_children():
+	for child in sprite_container.get_children():
 		if not child is Control:
 			continue
 		var id := child.get_instance_id()
@@ -34,40 +39,38 @@ func _process(delta: float) -> void:
 		var vel: Vector2 = _velocities[id]
 		var new_pos := ctrl.position + vel * delta
 
-		# Bounce off left/right walls.
 		if new_pos.x < 0.0:
 			new_pos.x = 0.0
 			vel.x = absf(vel.x)
-		elif new_pos.x + ctrl.size.x > bounds.size.x:
-			new_pos.x = bounds.size.x - ctrl.size.x
+		elif new_pos.x + ctrl.size.x > bounds_size.x:
+			new_pos.x = bounds_size.x - ctrl.size.x
 			vel.x = -absf(vel.x)
 
-		# Bounce off top/bottom walls.
 		if new_pos.y < 0.0:
 			new_pos.y = 0.0
 			vel.y = absf(vel.y)
-		elif new_pos.y + ctrl.size.y > bounds.size.y:
-			new_pos.y = bounds.size.y - ctrl.size.y
+		elif new_pos.y + ctrl.size.y > bounds_size.y:
+			new_pos.y = bounds_size.y - ctrl.size.y
 			vel.y = -absf(vel.y)
 
 		ctrl.position = new_pos
 		_velocities[id] = vel
 
 
-func _on_child_entered(child: Node) -> void:
+func _on_icon_added(child: Node) -> void:
 	if not child is Control:
 		return
 	var ctrl := child as Control
 
-	# Wait a frame so the child's size is finalised before placing it.
+	# Wait a frame so ctrl.size is valid before reading it.
 	await get_tree().process_frame
 
-	var bounds := get_rect()
-	var spawn_x := randf_range(0.0, maxf(0.0, bounds.size.x - ctrl.size.x))
-	var spawn_y := randf_range(0.0, maxf(0.0, bounds.size.y - ctrl.size.y))
-	ctrl.position = Vector2(spawn_x, spawn_y)
+	var bounds_size := sprite_container.size
+	ctrl.position = Vector2(
+		randf_range(0.0, maxf(0.0, bounds_size.x - ctrl.size.x)),
+		randf_range(0.0, maxf(0.0, bounds_size.y - ctrl.size.y))
+	)
 
-	# Random direction, random speed.
 	var angle := randf_range(0.0, TAU)
 	var speed := randf_range(min_speed, max_speed)
-	_velocities[child.get_instance_id()] = Vector2(cos(angle), sin(angle)) * speed
+	_velocities[ctrl.get_instance_id()] = Vector2(cos(angle), sin(angle)) * speed

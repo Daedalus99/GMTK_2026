@@ -27,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qe12f")
-game_scene_path = "uid://jj8xitmovmt4"
+game_scene_path = "uid://p70nh78dvtsh"
 
 [node name="UISoundController" type="Node" parent="." unique_id=1619985599]
 script = ExtResource("2_8qtwp")

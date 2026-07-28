@@ -3,11 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b74cv1sv0fm8s" path="res://stage_ui.tscn" id="1_g2rrn"]
 [ext_resource type="Script" uid="uid://dlleylljalgng" path="res://body.gd" id="2_qmdwo"]
 [ext_resource type="Shader" uid="uid://b80qhlvlo8be2" path="res://silhouette_fill.gdshader" id="2_vpsov"]
-[ext_resource type="Texture2D" uid="uid://dmlumupsbgr3g" path="res://bots/Cell stage/nanobot.png" id="5_qmdwo"]
-[ext_resource type="Texture2D" uid="uid://crgg4hvtfuyxa" path="res://bots/Cell stage/drillerbot.png" id="6_84doa"]
 [ext_resource type="Texture2D" uid="uid://8rhcgt1tj36n" path="res://human.png" id="7_4q027"]
-[ext_resource type="Texture2D" uid="uid://cfyd4gd0sg6wc" path="res://bots/Cell stage/venombot.png" id="7_6fdik"]
-[ext_resource type="Texture2D" uid="uid://com7vgy0ee8lv" path="res://bots/Cell stage/firebot.png" id="8_j8h7j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57rr8"]
 shader = ExtResource("2_vpsov")
@@ -58,38 +54,6 @@ grow_vertical = 2
 texture = SubResource("ViewportTexture_4q027")
 expand_mode = 1
 stretch_mode = 3
-
-[node name="TestSprite" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1844905313]
-layout_mode = 0
-offset_left = 523.0
-offset_top = 314.99997
-offset_right = 587.0
-offset_bottom = 378.99997
-texture = ExtResource("5_qmdwo")
-
-[node name="TestSprite2" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1706746977]
-layout_mode = 0
-offset_left = 978.0
-offset_top = 269.0
-offset_right = 1042.0
-offset_bottom = 333.0
-texture = ExtResource("6_84doa")
-
-[node name="TestSprite3" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1587383379]
-layout_mode = 0
-offset_left = 598.0
-offset_top = 82.0
-offset_right = 662.0
-offset_bottom = 146.0
-texture = ExtResource("7_6fdik")
-
-[node name="TestSprite4" type="TextureRect" parent="Body/SilhouetteDisplay" unique_id=1957286743]
-layout_mode = 0
-offset_left = 420.0
-offset_top = 192.99997
-offset_right = 484.0
-offset_bottom = 256.99997
-texture = ExtResource("8_j8h7j")
 
 [node name="SubViewport" type="SubViewport" parent="Body" unique_id=1593411804]
 transparent_bg = true
