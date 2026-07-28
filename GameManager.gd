@@ -3,9 +3,10 @@ extends Node
 # Game state variables
 var player_currency: float = 0
 var salary: float = 0 # currency per second.
-var payment_frequency: float = 0.5
+var payment_frequency: float = 0.2
 var timer_set: bool = false
 @export var game_stages: Array[Stage]
+var click_power: float = 1.0
 
 var current_stage_index: int = 0
 var current_stage: Stage = null
@@ -29,6 +30,7 @@ func reset_game() -> void:
 	_initial_load = false
 	currency_changed.emit(player_currency)
 	salary_changed.emit(salary)
+	click_power = 1.0
 
 # ------------------------------------------------------------------
 # Stage management
@@ -107,6 +109,7 @@ func increase_salary(amount: float) -> void:
 		setup_salary_timer()
 	salary += amount
 	salary_changed.emit(salary)
+	click_power = 1 + (salary*0.05)
 
 func setup_salary_timer() -> void:
 	timer_set = true

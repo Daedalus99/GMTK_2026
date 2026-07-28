@@ -8,4 +8,4 @@ func sci_no(val: float, sig_figs: int = 1) -> String:
 	
 	var order: int = floor(log(val) / log(10))
 	var coefficient: float = val / pow(10, order)
-	return "%.*fe%s%d" % [sig_figs, coefficient, vsign, int(order)]
+	return "%.*fe%s%d" % [sig_figs, coefficient, vsign, abs(order)]

@@ -13,4 +13,4 @@ func _gui_input(event: InputEvent) -> void:
 		_on_clicked()
 
 func _on_clicked() -> void:
-	GameManager.add_currency(click_power + (GameManager.salary*0.05))
+	GameManager.add_currency(GameManager.click_power)

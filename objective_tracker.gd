@@ -3,6 +3,8 @@ extends Container
 @onready var progress_title: Label = $objective_hp/display_label
 @onready var progress_label: Label = $objective_hp/amount
 @onready var dps_label: Label = $dps
+@onready var click_power: Label = $display_click/power
+@onready var lore_container: Control = $"../VBoxContainer"
 var show_as_percent: bool = true  # default matches cell stage behaviour
 
 func _ready() -> void:
@@ -43,3 +45,10 @@ func _update_dps(total_dps: float) -> void:
 		new_txt = ("%.1f" if total_dps < 10 else "%d") % total_dps
 	# new_txt = "%f.1 = %s" % [total_dps, new_txt]
 	dps_label.text = new_txt
+	var p: float = GameManager.click_power
+	click_power.text = ("%.1f" if p < 100 else "%d") % p 
+	
+
+
+func _on_lore_button_pressed() -> void:
+	lore_container.hide()
