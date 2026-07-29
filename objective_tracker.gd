@@ -4,7 +4,7 @@ extends Container
 @onready var progress_label: Label = $objective_hp/amount
 @onready var dps_label: Label = $dps
 @onready var click_power: Label = $display_click/power
-@onready var lore_container: Control = $"../VBoxContainer"
+@onready var lore_container: Control = $"../LoreContainer"
 var show_as_percent: bool = true  # default matches cell stage behaviour
 
 func _ready() -> void:

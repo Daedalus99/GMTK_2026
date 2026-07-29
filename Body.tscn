@@ -3,13 +3,23 @@
 [ext_resource type="PackedScene" uid="uid://b74cv1sv0fm8s" path="res://stage_ui.tscn" id="1_g2rrn"]
 [ext_resource type="Script" uid="uid://dlleylljalgng" path="res://body.gd" id="2_qmdwo"]
 [ext_resource type="Shader" uid="uid://b80qhlvlo8be2" path="res://silhouette_fill.gdshader" id="2_vpsov"]
+[ext_resource type="AudioStream" uid="uid://brplhi8pqkuxf" path="res://Audio/pop1.wav" id="5_4q027"]
+[ext_resource type="AudioStream" uid="uid://dqcn5rkhh21ci" path="res://Audio/pop2.wav" id="6_qmdwo"]
 [ext_resource type="Texture2D" uid="uid://8rhcgt1tj36n" path="res://human.png" id="7_4q027"]
+[ext_resource type="AudioStream" uid="uid://bygoey53xg4k6" path="res://Audio/pop3.wav" id="7_84doa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57rr8"]
 shader = ExtResource("2_vpsov")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4q027"]
 viewport_path = NodePath("Body/SubViewport")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6fdik"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("5_4q027")
+stream_1/stream = ExtResource("6_qmdwo")
+stream_2/stream = ExtResource("7_84doa")
 
 [node name="Body Scene" type="Control" unique_id=1352005898]
 layout_mode = 3
@@ -22,10 +32,10 @@ grow_vertical = 2
 [node name="Stage UI" parent="." unique_id=187739743 instance=ExtResource("1_g2rrn")]
 layout_mode = 1
 
-[node name="ShopUi" parent="Stage UI" index="1" unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container")]
+[node name="ShopUi" parent="Stage UI" index="2" unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container")]
 ware_spawn_container = NodePath("../../Body/SilhouetteDisplay")
 
-[node name="Body" type="Control" parent="." unique_id=1803973143]
+[node name="Body" type="Control" parent="." unique_id=1803973143 node_paths=PackedStringArray("audio")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +45,7 @@ offset_bottom = -138.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_qmdwo")
+audio = NodePath("AudioStreamPlayer2D")
 
 [node name="SilhouetteDisplay" type="TextureRect" parent="Body" unique_id=883698712]
 clip_children = 2
@@ -78,5 +89,8 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("7_4q027")
 expand_mode = 4
 stretch_mode = 5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Body" unique_id=917117838]
+stream = SubResource("AudioStreamRandomizer_6fdik")
 
 [editable path="Stage UI"]

@@ -8,6 +8,7 @@ var _last_amount: float = 0.0
 
 @export var float_distance: float = 40.0
 @export var float_duration: float = 1.0
+@onready var audio: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
 
 func _ready() -> void:
 	# Set initial baseline before connecting the signal
@@ -20,7 +21,10 @@ func _ready() -> void:
 func _update_display(new_amount: float) -> void:
 	# Calculate change amount
 	var diff: float = floor(new_amount) - floor(_last_amount)
-	
+
+	if audio and diff > 0:
+		audio.play()
+
 	# Update main display text
 	currency_label.text = ("x%d" % floor(new_amount))
 	
@@ -32,6 +36,8 @@ func _update_display(new_amount: float) -> void:
 	_last_amount = new_amount
 
 func _spawn_floating_text(change: float) -> void:
+	#TODO: Make the floating text spawn from the cursor on clicks instead of
+	# the display.
 	var floating_label := Label.new()
 	
 	# Format the text with a plus sign for positive changes

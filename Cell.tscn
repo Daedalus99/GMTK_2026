@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b74cv1sv0fm8s" path="res://stage_ui.tscn" id="1_hqjpw"]
 [ext_resource type="Script" uid="uid://t1whjqingmjx" path="res://cell.gd" id="1_x782j"]
+[ext_resource type="AudioStream" uid="uid://brplhi8pqkuxf" path="res://Audio/pop1.wav" id="4_a8024"]
+[ext_resource type="AudioStream" uid="uid://dqcn5rkhh21ci" path="res://Audio/pop2.wav" id="5_x782j"]
+[ext_resource type="AudioStream" uid="uid://bygoey53xg4k6" path="res://Audio/pop3.wav" id="6_a755x"]
 [ext_resource type="Script" uid="uid://bqibbmigy1my3" path="res://circle_container.gd" id="7_a755x"]
 
 [sub_resource type="Shader" id="Shader_p3prn"]
@@ -486,6 +489,13 @@ _data = {
 &"attack_cell": SubResource("Animation_vkkua")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6shm3"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("4_a8024")
+stream_1/stream = ExtResource("5_x782j")
+stream_2/stream = ExtResource("6_a755x")
+
 [node name="Cell Scene" type="Control" unique_id=150310224]
 layout_mode = 3
 anchors_preset = 15
@@ -503,14 +513,14 @@ mouse_filter = 2
 [node name="Background" parent="Stage UI" index="0" unique_id=1662449333]
 mouse_filter = 2
 
-[node name="ShopUi" parent="Stage UI" index="1" unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container")]
+[node name="ShopUi" parent="Stage UI" index="2" unique_id=2018579107 node_paths=PackedStringArray("ware_spawn_container")]
 mouse_filter = 2
 ware_spawn_container = NodePath("../../Cell/CellBody/CircleContainer")
 
 [node name="CurrencyDisplay" parent="Stage UI/ShopUi" index="1" unique_id=1220917504]
 mouse_filter = 2
 
-[node name="progress_display" parent="Stage UI" index="2" unique_id=883238543]
+[node name="progress_display" parent="Stage UI" index="3" unique_id=883238543]
 mouse_filter = 2
 
 [node name="objective_hp" parent="Stage UI/progress_display" index="0" unique_id=1143825827]
@@ -526,7 +536,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="CellBody" type="ColorRect" parent="Cell" unique_id=23919256]
+[node name="CellBody" type="ColorRect" parent="Cell" unique_id=23919256 node_paths=PackedStringArray("audio")]
 material = SubResource("ShaderMaterial_cell")
 layout_mode = 1
 anchors_preset = -1
@@ -541,6 +551,7 @@ offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x782j")
+audio = NodePath("AudioStreamPlayer2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="CellNucleus" type="ColorRect" parent="Cell/CellBody" unique_id=3479582]
@@ -661,5 +672,8 @@ metadata/_edit_lock_ = true
 libraries/ = SubResource("AnimationLibrary_7g3jn")
 autoplay = &"attack_cell"
 speed_scale = 4.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Cell/CellBody" unique_id=1504468880]
+stream = SubResource("AudioStreamRandomizer_6shm3")
 
 [editable path="Stage UI"]

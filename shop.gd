@@ -9,6 +9,7 @@ var bought_count = 0
 var ware_purchase_counts: Dictionary = {}
 @export var inflation_rate: float = 1.15
 @onready var bg = $"../Background"
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready() -> void:
 	GameManager.stage_changed.connect(_on_stage_changed)
@@ -61,6 +62,7 @@ func update_button_text(button: Button, ware: Ware):
 func _purchase(ware: Ware, button: Button):
 	var current_cost = get_current_cost(ware)
 	if GameManager.spend_currency(current_cost):
+		if audio: audio.play()
 		# Update purchase count and costs
 		ware_purchase_counts[ware.name] += 1
 		GameManager.increase_salary(ware.dps)

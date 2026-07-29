@@ -6,6 +6,7 @@ class_name ClickableTarget
 extends Control
 
 @export var click_power: float = 1.0
+@export var audio: AudioStreamPlayer2D
 # @export var target: Control
 
 func _gui_input(event: InputEvent) -> void:
@@ -14,3 +15,5 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_clicked() -> void:
 	GameManager.add_currency(GameManager.click_power)
+	if audio:
+		audio.play()

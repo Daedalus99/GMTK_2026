@@ -5,7 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cb53jqpqewn46" path="res://shop ui.tscn" id="3_fr8ke"]
 [ext_resource type="Texture2D" uid="uid://cwbgc4hydyi8m" path="res://currency/dna.png" id="4_oj415"]
 [ext_resource type="Script" uid="uid://duth074bs3jyf" path="res://currency/currency_display.gd" id="5_hmboq"]
+[ext_resource type="AudioStream" uid="uid://ds5bxy11p5xen" path="res://Audio/bup1.wav" id="6_fr8ke"]
 [ext_resource type="Script" uid="uid://dvn3jb68x0lsn" path="res://objective_tracker.gd" id="6_pcxdm"]
+[ext_resource type="AudioStream" uid="uid://c47q3brj6w20d" path="res://Audio/bup2.wav" id="7_oj415"]
+[ext_resource type="AudioStream" uid="uid://b48sqwbx0vpqv" path="res://Audio/chaching1.wav" id="8_oj415"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6shm3"]
 shader = ExtResource("1_qoxb4")
@@ -16,6 +19,17 @@ shader_parameter/layer_count = 17
 shader_parameter/time_scale = 0.050000002375
 shader_parameter/base_intensity = 0.1110000052725
 shader_parameter/size = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6shm3"]
+random_pitch = 1.122462
+streams_count = 2
+stream_0/stream = ExtResource("6_fr8ke")
+stream_1/stream = ExtResource("7_oj415")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hmboq"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("8_oj415")
 
 [node name="Stage UI" type="Control" unique_id=187739743]
 layout_mode = 3
@@ -34,27 +48,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1845221730]
-custom_minimum_size = Vector2(360, 0)
+[node name="LoreContainer" type="VBoxContainer" parent="." unique_id=1845221730]
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -380.0
+offset_left = -328.0
 offset_top = 2.0
-offset_right = -20.0
+offset_right = -72.0
 offset_bottom = -130.0
 grow_horizontal = 0
 grow_vertical = 2
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=32401538]
+[node name="LoreText" type="RichTextLabel" parent="LoreContainer" unique_id=32401538]
 layout_mode = 2
 text = "In this stage you must destroy the cell walls!"
 fit_content = true
+horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=489379753]
+[node name="Button" type="Button" parent="LoreContainer" unique_id=489379753]
 layout_mode = 2
 text = "Okay, I get it!"
 
@@ -84,6 +99,16 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "x0"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ShopUi/CurrencyDisplay" unique_id=1291929869]
+stream = SubResource("AudioStreamRandomizer_6shm3")
+volume_db = -20.0
+pitch_scale = 0.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ShopUi" unique_id=309237318]
+stream = SubResource("AudioStreamRandomizer_hmboq")
+volume_db = -20.0
+max_polyphony = 3
+
 [node name="progress_display" type="VBoxContainer" parent="." unique_id=883238543]
 layout_mode = 0
 offset_right = 548.0
@@ -98,7 +123,7 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 45
-text = "Cell-wall integrity:"
+text = "Cell-wall integrity: "
 
 [node name="amount" type="Label" parent="progress_display/objective_hp" unique_id=1505787903]
 layout_mode = 2
@@ -131,4 +156,4 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "1"
 
-[connection signal="pressed" from="VBoxContainer/Button" to="progress_display" method="_on_lore_button_pressed"]
+[connection signal="pressed" from="LoreContainer/Button" to="progress_display" method="_on_lore_button_pressed"]
